@@ -9,8 +9,8 @@ $factory->define(Review::class, function (Faker $faker) {
     return [
         'title' => $faker->realText(10),
         'body' => $faker->realText(50),
-        'get_credit' => $faker->numberBetween(1,10),
-        'adequacy' => $faker->numberBetween(1,10),
+        'get_credit' => $faker->numberBetween(1,5),
+        'adequacy' => $faker->numberBetween(1,5),
         'created_at' => now()
         //
     ];

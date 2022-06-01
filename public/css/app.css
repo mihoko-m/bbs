@@ -72,7 +72,7 @@ body {
   line-height: 1.6;
   color: #212529;
   text-align: left;
-  background-color: #fff;
+  background-color: #f8fafc;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -170,7 +170,7 @@ sup {
 }
 
 a {
-  color: #4A2D84;
+  color: #3490dc;
   text-decoration: none;
   background-color: transparent;
 }
@@ -2689,8 +2689,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #4A2D84;
-  border-color: #4A2D84;
+  background-color: #3490dc;
+  border-color: #3490dc;
 }
 
 .btn-primary:hover {
@@ -5058,8 +5058,7 @@ input[type=button].btn-block {
 .card-header {
   padding: 0.75rem 1.25rem;
   margin-bottom: 0;
-  color: #fff;
-  background-color: #4A2D84;
+  background-color: rgba(0, 0, 0, 0.03);
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
@@ -5279,7 +5278,7 @@ input[type=button].btn-block {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #4A2D84;
+  color: #3490dc;
   background-color: #fff;
   border: 1px solid #dee2e6;
 }
@@ -6722,7 +6721,9 @@ a.close.disabled {
 .popover-body {
   padding: 0.5rem 0.75rem;
   color: #212529;
-}carousel {
+}
+
+.carousel {
   position: relative;
 }
 

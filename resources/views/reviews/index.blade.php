@@ -17,6 +17,10 @@
                     <h2 class='title'>
                         <a href="/reviews/{{ $review->id }}">{{ $review->title }}</a>
                     </h2>
+                    <div id="star">
+　                      <star-rating v-bind:star-size="20" v-bind:max-rating="5" v-bind:rating="{{ $review->get_credit }}" v-bind:read-only=true>
+　                      </star-rating>
+                    </div>
                     <p class='body'>{{ $review->body }}</p>
                 </div>
             @endforeach
