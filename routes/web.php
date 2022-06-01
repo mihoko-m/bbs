@@ -12,4 +12,7 @@
 */
 
 Route::get('/', 'ReviewController@index');
-Route::get('/reviews/{review}', 'ReviewController@show');
+Route::group(['middleware' => ['auth']], function(){
+    Route::get('/reviews/{review}', 'ReviewController@show');
+});
+Auth::routes();
