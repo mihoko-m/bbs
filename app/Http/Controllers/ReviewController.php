@@ -15,4 +15,14 @@ class ReviewController extends Controller
     {
         return view('reviews/show')->with(['review' => $review]);
     }
+    public function create()
+    {
+        return view('reviews/create');
+    }
+    public function store(Request $request, Review $review)
+    {
+        $input = $request['review'];
+        $review->fill($input)->save();
+        return redirect('/reviews/' . $review->id);
+    }
 }

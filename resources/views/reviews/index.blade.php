@@ -18,14 +18,14 @@
                         <a href="/reviews/{{ $review->id }}">{{ $review->title }}</a>
                     </div>
                     <div class="card-body">
-                        <div id="get_credit">
+                        <div class="get_credit">
                             単位取得度
-　                          <star-rating v-bind:star-size="20" v-bind:max-rating="5" v-bind:rating="{{ $review->get_credit }}" v-bind:read-only=true>
+　                          <star-rating :star-size="20" :rating="{{ $review->get_credit }}" :read-only=true>
 　                          </star-rating>
                         </div>
-                        <div id="adequacy">
+                        <div class="adequacy">
                             充実度
-　                          <star-rating v-bind:star-size="20" v-bind:max-rating="5" v-bind:rating="{{ $review->adequacy }}" v-bind:read-only=true>
+　                          <star-rating :star-size="20" :rating="{{ $review->adequacy }}" :read-only=true>
 　                          </star-rating>
                         </div>
                     </div>
@@ -35,6 +35,7 @@
         <div class='paginate'>
             {{ $reviews->links() }}
         </div>
+        [<a href='/reviews/create'>新規投稿する</a>]
     </body>
 </html>
 @endsection

@@ -12,13 +12,25 @@
 
 @section('content')
     <body>
-        <h1 class="title">
-            {{ $review->title }}
-        </h1>
-        <div class="content">
-            <div class="content__review">
-                <h3>本文</h3>
-                <p>{{ $review->body }}</p>    
+        <div class='card'>
+            <div class="card-header">
+                {{ $review->title }}
+            </div>
+            <div class="card-body">
+                <div class="get_credit">
+                    単位取得度
+　                  <star-rating :star-size="20" :rating="{{ $review->get_credit }}" :read-only=true>
+　                  </star-rating>
+                </div>
+                <div class="adequacy">
+                    充実度
+　                  <star-rating :star-size="20" :rating="{{ $review->adequacy }}" :read-only=true>
+　                  </star-rating>
+                </div>
+                <div class="body">
+                    <p></p>
+                    {{ $review->body}}
+                </div>
             </div>
         </div>
         <div class="footer">
