@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Review;
-use Illuminate\Http\Request;
+use App\Http\Requests\ReviewRequest;
 
 class ReviewController extends Controller
 {
@@ -19,7 +19,7 @@ class ReviewController extends Controller
     {
         return view('reviews/create');
     }
-    public function store(Request $request, Review $review)
+    public function store(Review $review, ReviewRequest $request)
     {
         $input = $request['review'];
         $review->fill($input)->save();

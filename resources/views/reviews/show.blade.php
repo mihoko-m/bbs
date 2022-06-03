@@ -12,29 +12,32 @@
 
 @section('content')
     <body>
-        <div class='card'>
-            <div class="card-header">
-                {{ $review->title }}
+        <div class="container">
+            <div class='card'>
+                <div class="card-header">
+                    {{ $review->title }}
+                </div>
+                <div class="card-body">
+                    <div class="get_credit">
+                        単位取得度
+　                      <star-rating :star-size="20" :rating="{{ $review->get_credit }}" :read-only=true>
+　                      </star-rating>
+                    </div>
+                    <div class="adequacy">
+                        充実度
+　                      <star-rating :star-size="20" :rating="{{ $review->adequacy }}" :read-only=true>
+　                      </star-rating>
+                    </div>
+                    <div class="show-body">
+                        {{ $review->body}}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <a class="btn btn-link" href="/">戻る</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="get_credit">
-                    単位取得度
-　                  <star-rating :star-size="20" :rating="{{ $review->get_credit }}" :read-only=true>
-　                  </star-rating>
-                </div>
-                <div class="adequacy">
-                    充実度
-　                  <star-rating :star-size="20" :rating="{{ $review->adequacy }}" :read-only=true>
-　                  </star-rating>
-                </div>
-                <div class="body">
-                    <p></p>
-                    {{ $review->body}}
-                </div>
-            </div>
-        </div>
-        <div class="footer">
-            <a href="/">戻る</a>
         </div>
     </body>
 </html>
