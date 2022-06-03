@@ -45,7 +45,6 @@ class VerifyEmail extends Notification
 
         return (new MailMessage)
             ->subject('メール認証')
-            ->greeting('以下の認証リンクをクリックしてください。')
             ->view('emails.verify-email', ['url' => $this->verificationUrl($notifiable), 'user' => $notifiable]);
     }
 
