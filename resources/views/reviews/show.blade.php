@@ -15,7 +15,7 @@
         <div class="container">
             <div class='card'>
                 <div class="card-header">
-                    {{ $review->title }}
+                    {{ $review->class }}
                 </div>
                 <div class="card-body">
                     <div class="get_credit">

@@ -19,7 +19,7 @@
                     @foreach ($reviews as $review)
                         <div class='card'>
                             <div class="card-header">
-                                <a title ="btn btn-link" href="/reviews/{{ $review->id }}">{{ $review->title }}</a>
+                                <a title ="btn btn-link" href="/reviews/{{ $review->id }}">{{ $review->class }}</a>
                             </div>
                             <div class="card-body">
                                 <div class="get_credit">

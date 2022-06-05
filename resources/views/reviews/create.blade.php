@@ -15,40 +15,53 @@
                         @csrf
                             <div class="card-body">
                                 <div class="form-group row">
-                                    <label for="title" class="col-md-4 col-form-label text-md-right">科目名</label>
+                                    <label for="title" class="col-md-4 col-form-label text-md-right">授業名</label>
                                         <div class="col-md-6">
-                                            <input type="text" name="review[title]" placeholder="科目名"/>
-                                            <p class="title__error" style="color:red">{{ $errors->first('review.title') }}</p>
+                                            <input type="text" name="review[class]" placeholder="授業名"/>
+                                            <p class="title__error" style="color:red">{{ $errors->first('review.class') }}</p>
+                                        </div>
+                                </div>
+                                <div class="col-md-4 text-md-right">教授/講師名</div>
+                                <div class="form-group row">
+                                    <label for="teacher_familyname" class="col-md-4 col-form-label text-md-right">姓</label>
+                                        <div class="col-md-6">
+                                            <input type="text" name="review[teacher_familyname]" placeholder="姓"/>
+                                            <p class="title__error" style="color:red">{{ $errors->first('review.teacher_familyname') }}</p>
+                                        </div>
+                                    <label for="teacher_firstname" class="col-md-4 col-form-label text-md-right">名</label>
+                                        <div class="col-md-6">
+                                            <input type="text" name="review[teacher_firstname]" placeholder="名"/>
+                                            <p class="title__error" style="color:red">{{ $errors->first('review.teacher_firstname') }}</p>
                                         </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="get_credit" class="col-md-4 col-form-label text-md-right">単位取得度</label>
                                         <div class="col-md-6">
                                             <select name="review[get_credit]">
-                            <option value="1">★☆☆☆☆</option>
-                            <option value="2">★★☆☆☆</option>
-                            <option value="3">★★★☆☆</option>
-                            <option value="4">★★★★☆</option>
-                            <option value="5">★★★★★</option>
-                        </select>
+                                                <option value="1">★☆☆☆☆ かなり厳しい</option>
+                                                <option value="2">★★☆☆☆ 厳しい</option>
+                                                <option value="3" selected>★★★☆☆ 普通</option>
+                                                <option value="4">★★★★☆ 簡単</option>
+                                                <option value="5">★★★★★ かなり簡単</option>
+                                            </select>
                                         </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="adequacy" class="col-md-4 col-form-label text-md-right">充実度</label>
                                         <div class="col-md-6">
                                             <select name="review[adequacy]">
-                                <option value="1">★☆☆☆☆</option>
-                                <option value="2">★★☆☆☆</option>
-                                <option value="3">★★★☆☆</option>
-                                <option value="4">★★★★☆</option>
-                                <option value="5">★★★★★</option>
-                        </select>
+                                                <option value="1">★☆☆☆☆ かなり物足りない</option>
+                                                <option value="2">★★☆☆☆ 物足りない</option>
+                                                <option value="3" selected>★★★☆☆ 普通</option>
+                                                <option value="4">★★★★☆ 充実</option>
+                                                <option value="5">★★★★★ かなり充実</option>
+                                            </select>
                                         </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="body" class="col-md-4 col-form-label text-md-right">本文</label>
+                                    <label for="body" class="col-md-4 col-form-label text-md-right">講義内容</label>
                                         <div class="col-md-6">
-                                            <textarea class="form-control" name="review[body]" placeholder="授業の詳細内容を入力してください。"></textarea>
+                                            <textarea class="form-control" name="review[body]" placeholder="講義の詳細内容を入力してください。"></textarea>
                                             <p class="body__error" style="color:red">{{ $errors->first('review.body') }}</p>
                                         </div>
                                 </div>

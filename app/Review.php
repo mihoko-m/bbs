@@ -13,9 +13,11 @@ class Review extends Model
     }
     
     protected $fillable = [
-        'title',
+        'class',
         'body',
         'adequacy',
         'get_credit',
+        'teacher_familyname',
+        'teacher_firstname',
     ];
 }
