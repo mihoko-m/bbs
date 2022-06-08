@@ -43,6 +43,13 @@
                                             </select>
                                         </div> 
                                 </div>
+                                <div class="form-group row">
+                                    <label for="evaluation" class="col-md-4 col-form-label text-md-right">成績評価</label>
+                                        <div class="col-md-6">
+                                            @foreach($evaluations as $evaluation)
+                                                <input type="radio" name="review[evaluation_id]" value="{{ $evaluation->id }}">{{ $evaluation->name }}<br>
+                                            @endforeach
+                                        </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="get_credit" class="col-md-4 col-form-label text-md-right">単位取得度</label>

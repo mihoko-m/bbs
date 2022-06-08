@@ -30,4 +30,9 @@ class Review extends Model
     {
         return $this->belongsTo('App\User');
     }
+    
+    public function Evaluation()
+    {
+        return $this->belongsTo('App\Evaluation');
+    }
 }

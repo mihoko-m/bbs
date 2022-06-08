@@ -46,10 +46,26 @@
                             @if(isset( $review->user ) && Auth::user()->id === $review->user->id)
                                 <a class="btn btn-link" href="/reviews/{{ $review->id }}/edit">編集する</a>
                             @endif
+                            @if(isset( $review->user ) && Auth::user()->id === $review->user->id)
+                                <form action="/reviews/{{ $review->id }}" id="form_{{ $review->id }}" method="post" style="display:inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" onclick="return Check()" class="btn btn-link">削除する</button> 
+                                </form>
+                            @endif
                     </div>
                 </div>
             </div>
         </div>
+        <script>
+            function Check(){
+                if(confirm("削除しますが本当によろしいですか？")){
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        </script>
     </body>
 </html>
 @endsection

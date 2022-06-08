@@ -27,7 +27,7 @@
                                 </div>
                                 <div class="faculty">
                                     @if(isset( $review->faculty ))
-                                        {{ $review->faculty->name }}
+                                        {{ $review->faculty->name }} {{ $review->faculty->department_name }}
                                     @endif
                                 </div>
                             </div>
