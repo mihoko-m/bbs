@@ -20,6 +20,16 @@
                         <div class='card'>
                             <div class="card-header">
                                 <a title ="btn btn-link" href="/reviews/{{ $review->id }}">{{ $review->class }}</a>
+                                <div class="user">
+                                    @if(isset( $review->user ))
+                                        {{ $review->user->name }}
+                                    @endif
+                                </div>
+                                <div class="faculty">
+                                    @if(isset( $review->faculty ))
+                                        {{ $review->faculty->name }}
+                                    @endif
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="get_credit">

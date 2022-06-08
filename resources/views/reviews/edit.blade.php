@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <title>レビュー投稿</title>
+        <title>レビュー編集</title>
     </head>
 @extends('layouts.app')
 
@@ -10,14 +10,15 @@
     <body>
         <div class="container">
             <div class="card">
-                <div class="card-header">新規投稿</div>
-                    <form action="/reviews" method="POST">
+                <div class="card-header">投稿編集</div>
+                    <form action="/reviews/{{ $review->id }}" method="POST">
                         @csrf
+                        @method('PUT')
                             <div class="card-body">
                                 <div class="form-group row">
                                     <label for="title" class="col-md-4 col-form-label text-md-right">授業名</label>
                                         <div class="col-md-6">
-                                            <input type="text" name="review[class]" placeholder="授業名"/>
+                                            <input type="text" name="review[class]" value="{{ $review->class }}"/>
                                             <p class="title__error" style="color:red">{{ $errors->first('review.class') }}</p>
                                         </div>
                                 </div>
@@ -25,10 +26,20 @@
                                     <label for="faculty" class="col-md-4 col-form-label text-md-right">学部・学科名</label>
                                         <div class="col-md-6">
                                             <select name="review[faculty_id]">
-                                                    <option hidden>選択してください</option>
-                                                @foreach($faculties as $faculty)
-                                                    <option value="{{ $faculty->id }}">{{ $faculty->name }} {{ $faculty->department_name }}</option>
-                                                @endforeach
+                                                    @if(!isset( $review->faculty ))
+                                                        <option hidden>選択してください</option>
+                                                        @foreach($faculties as $faculty)
+                                                            <option value="{{ $faculty->id }}">{{ $faculty->name }} {{ $faculty->department_name }}</option>
+                                                        @endforeach
+                                                    @else
+                                                        @foreach($faculties as $faculty)
+                                                            @if( $faculty->id === $review->faculty->id )
+                                                                <option value="{{ $faculty->id }}" selected>{{ $faculty->name }} {{ $faculty->department_name }}</option>
+                                                            @else
+                                                                <option value="{{ $faculty->id }}">{{ $faculty->name }} {{ $faculty->department_name }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
                                             </select>
                                         </div> 
                                 </div>
@@ -60,7 +71,7 @@
                                 <div class="form-group row">
                                     <label for="body" class="col-md-4 col-form-label text-md-right">講義内容</label>
                                         <div class="col-md-6">
-                                            <textarea class="form-control" name="review[body]" placeholder="講義の詳細内容を入力してください。"></textarea>
+                                            <textarea class="form-control" name="review[body]">{{ $review->body }}</textarea>
                                             <p class="body__error" style="color:red">{{ $errors->first('review.body') }}</p>
                                         </div>
                                 </div>

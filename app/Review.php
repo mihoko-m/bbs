@@ -9,7 +9,7 @@ class Review extends Model
     public function getPaginateByLimit(int $limit_count = 10)
     {
     // updated_atで降順に並べたあと、limitで件数制限をかける
-        return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
+        return $this::with('faculty')->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
     
     protected $fillable = [
@@ -17,7 +17,17 @@ class Review extends Model
         'body',
         'adequacy',
         'get_credit',
-        'teacher_familyname',
-        'teacher_firstname',
+        'faculty_id',
+        'user_id',
     ];
+    
+    public function faculty()
+    {
+        return $this->belongsTo('App\Faculty');
+    }
+    
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

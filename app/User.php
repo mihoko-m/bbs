@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Notifications\VerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Auth;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -42,5 +43,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function sendEmailVerificationNotification()
     {
         $this->notify(new VerifyEmail());
+    }
+    
+    public function faculty()
+    {
+        return $this->belongsTo('App\Faculty');
+    }
+    
+    public function reviews()   
+    {
+        return $this->hasMany('App\Review');  
     }
 }

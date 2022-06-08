@@ -16,6 +16,16 @@
             <div class='card'>
                 <div class="card-header">
                     {{ $review->class }}
+                    <div class="user">
+                        @if(isset( $review->user ))
+                            {{ $review->user->name }}
+                        @endif
+                    </div>
+                    <div class="faculty">
+                        @if(isset( $review->faculty ))
+                            {{ $review->faculty->name }}
+                        @endif
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="get_credit">
@@ -32,9 +42,10 @@
                         {{ $review->body}}
                     </div>
                     <div class="row">
-                        <div class="col-md-8">
                             <a class="btn btn-link" href="/">戻る</a>
-                        </div>
+                            @if(isset( $review->user ) && Auth::user()->id === $review->user->id)
+                                <a class="btn btn-link" href="/reviews/{{ $review->id }}/edit">編集する</a>
+                            @endif
                     </div>
                 </div>
             </div>
