@@ -22,6 +22,13 @@
                                         </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label for="subject" class="col-md-4 col-form-label text-md-right">科目名</label>
+                                        <div class="col-md-6">
+                                            <input type="text" name="subject[name]" placeholder="科目名"/>
+                                            <p class="title__error" style="color:red">{{ $errors->first('subject.name') }}</p>
+                                        </div>
+                                </div>
+                                <div class="form-group row">
                                     <label for="faculty" class="col-md-4 col-form-label text-md-right">学部・学科名</label>
                                         <div class="col-md-6">
                                             <select name="review[faculty_id]">

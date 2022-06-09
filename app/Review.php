@@ -19,6 +19,7 @@ class Review extends Model
         'get_credit',
         'faculty_id',
         'user_id',
+        'subject_id',
     ];
     
     public function faculty()
@@ -31,8 +32,13 @@ class Review extends Model
         return $this->belongsTo('App\User');
     }
     
-    public function Evaluation()
+    public function evaluation()
     {
         return $this->belongsTo('App\Evaluation');
+    }
+    
+    public function subject()
+    {
+        return $this->belongsTo('App\Faculty');
     }
 }
