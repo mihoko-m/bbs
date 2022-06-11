@@ -19,5 +19,6 @@ Route::group(['middleware' => ['auth','verified']], function(){
     Route::put('/reviews/{review}', 'ReviewController@update');
     Route::get('/reviews/{review}', 'ReviewController@show');
     Route::delete('/reviews/{review}', 'ReviewController@delete');
+    Route::get('/users/{user}/mypage', 'UserController@mypage');
 });
 Auth::routes(['verify' => true]);

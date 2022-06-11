@@ -18,7 +18,11 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
+        'faculty_id',
+        'profile',
     ];
 
     /**
@@ -53,5 +57,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function reviews()   
     {
         return $this->hasMany('App\Review');  
+    }
+    
+    public function getByUser(int $limit_count = 3)
+    {
+        return $this->reviews()->with('user')->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
 }

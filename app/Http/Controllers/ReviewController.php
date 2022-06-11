@@ -7,6 +7,7 @@ use App\Faculty;
 use App\User;
 use App\Evaluation;
 use App\Subject;
+use Illuminate\Http\Request;
 use App\Http\Requests\ReviewRequest;
 use App\Http\Requests\SubjectRequest;
 
