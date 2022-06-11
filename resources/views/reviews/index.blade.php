@@ -19,28 +19,41 @@
                     @foreach ($reviews as $review)
                         <div class='card'>
                             <div class="card-header">
-                                <a title ="btn btn-link" href="/reviews/{{ $review->id }}">{{ $review->class }}</a>
-                                <div class="user">
-                                    @if(isset( $review->user ))
-                                        {{ $review->user->name }}
-                                    @endif
-                                </div>
-                                <div class="faculty">
-                                    @if(isset( $review->faculty ))
-                                        {{ $review->faculty->name }} {{ $review->faculty->department_name }}
-                                    @endif
+                                @if(isset( $review->subject ))
+                                    <b>{{ $review->subject->name }}</b>
+                                @else
+                                    <b>{{ $review->class }}</b>
+                                @endif
+                                <div class="row">
+                                    <div class="faculty col-md-6">
+                                        @if(isset( $review->faculty ))
+                                            {{ $review->faculty->name }} {{ $review->faculty->department_name }}
+                                        @endif
+                                    </div>
+                                    <div class="user col-md-6 text-md-right">
+                                        @if(isset( $review->user ))
+                                            投稿者：{{ $review->user->name }}
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="get_credit">
-                                    単位取得度
-                                    <star-rating :star-size="20" :rating="{{ $review->get_credit }}" :read-only=true>
-                                    </star-rating>
+                                    <p>
+                                        単位取得度
+                                        <star-rating :star-size="20" :rating="{{ $review->get_credit }}" :read-only=true>
+                                        </star-rating>
+                                    </p>
                                 </div>
                                 <div class="adequacy">
-                                    充実度
-                                    <star-rating :star-size="20" :rating="{{ $review->adequacy }}" :read-only=true>
-                                    </star-rating>
+                                    <p>
+                                        充実度
+                                        <star-rating :star-size="20" :rating="{{ $review->adequacy }}" :read-only=true>
+                                        </star-rating>
+                                    </p>
+                                </div>
+                                <div class="text-right">
+                                    <a title ="btn btn-link " href="/reviews/{{ $review->id }}">>>レビューの詳細を見る</a>
                                 </div>
                             </div>
                         </div>

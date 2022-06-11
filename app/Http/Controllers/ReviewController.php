@@ -27,9 +27,13 @@ class ReviewController extends Controller
         return view('reviews/create')->with(['faculties' => $faculty->get()])->with(['evaluations' => $evaluation->get()]);
     }
     
-    public function edit(Review $review, Faculty $faculty, Evaluation $evaluation)
+    public function edit(Review $review, Faculty $faculty, Evaluation $evaluation, Subject $subject)
     {
-        return view('reviews/edit')->with(['review' => $review])->with(['faculties' => $faculty->get()])->with(['evaluations' => $evaluation->get()]);
+        return view('reviews/edit')
+        ->with(['review' => $review])
+        ->with(['faculties' => $faculty->get()])
+        ->with(['evaluations' => $evaluation->get()])
+        ->with(['subject' => $subject]);
     }
     
     public function store(Review $review, Subject $subject, ReviewRequest $request, SubjectRequest $request_subject)
@@ -51,10 +55,21 @@ class ReviewController extends Controller
         return redirect('/reviews/' . $review->id);
     }
     
-    public function update(ReviewRequest $request, Review $review)
+    public function update(ReviewRequest $request, Review $review, SubjectRequest $request_subject, Subject $subject)
     {
         if(\Auth::user()->id == $review->user_id){
             $input_review = $request['review'];
+            $input_subject = $request_subject['subject'];
+            $name = $input_subject['name'];
+            $check = $subject->where('name', "$name" )->first();
+            
+            if(is_null($check)){
+                $subject->fill($input_subject)->save();
+                $input_review += ['subject_id' => $subject->id];
+            }else{
+                $input_review += ['subject_id' => $check->id];
+            }
+            
             $input_review += ['user_id' => $request->user()->id];
             $review->fill($input_review)->save();
             return redirect('/reviews/' . $review->id);

@@ -23,6 +23,13 @@
                                         </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label for="subject" class="col-md-4 col-form-label text-md-right">科目名</label>
+                                        <div class="col-md-6">
+                                            <input type="text" name="subject[name]" value="{{ $review->subject->name }}"/>
+                                            <p class="title__error" style="color:red">{{ $errors->first('subject.name') }}</p>
+                                        </div>
+                                </div>
+                                <div class="form-group row">
                                     <label for="faculty" class="col-md-4 col-form-label text-md-right">学部・学科名</label>
                                         <div class="col-md-6">
                                             <select name="review[faculty_id]">
@@ -45,9 +52,10 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="evaluation" class="col-md-4 col-form-label text-md-right">成績評価</label>
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                                             @foreach($evaluations as $evaluation)
-                                                <input type="radio" name="review[evaluation_id]" value="{{ $evaluation->id }}">{{ $evaluation->name }}<br>
+                                                <input type="radio" name="review[evaluation_id]" value="{{ $evaluation->id }}"/>
+                                                    <small>{{ $evaluation->name }}</small>
                                             @endforeach
                                         </div>
                                 </div>
