@@ -12,7 +12,13 @@
 */
 
 Route::get('/', 'ReviewController@index');
-Route::group(['middleware' => ['auth']], function(){
+Route::group(['middleware' => ['auth','verified']], function(){
+    Route::post('/reviews', 'ReviewController@store');
+    Route::get('/reviews/create', 'ReviewController@create');
+    Route::get('/reviews/{review}/edit', 'ReviewController@edit');
+    Route::put('/reviews/{review}', 'ReviewController@update');
     Route::get('/reviews/{review}', 'ReviewController@show');
+    Route::delete('/reviews/{review}', 'ReviewController@delete');
+    Route::get('/users/{user}/mypage', 'UserController@mypage');
 });
-Auth::routes();
+Auth::routes(['verify' => true]);

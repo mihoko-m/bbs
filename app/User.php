@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Notifications\VerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Auth;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -16,7 +18,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
+        'faculty_id',
+        'profile',
     ];
 
     /**
@@ -36,4 +42,25 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new VerifyEmail());
+    }
+    
+    public function faculty()
+    {
+        return $this->belongsTo('App\Faculty');
+    }
+    
+    public function reviews()   
+    {
+        return $this->hasMany('App\Review');  
+    }
+    
+    public function getByUser(int $limit_count = 3)
+    {
+        return $this->reviews()->with('user')->orderBy('updated_at', 'DESC')->paginate($limit_count);
+    }
 }

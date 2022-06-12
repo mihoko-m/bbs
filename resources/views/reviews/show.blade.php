@@ -12,18 +12,75 @@
 
 @section('content')
     <body>
-        <h1 class="title">
-            {{ $review->title }}
-        </h1>
-        <div class="content">
-            <div class="content__review">
-                <h3>本文</h3>
-                <p>{{ $review->body }}</p>    
+        <div class="container">
+            <div class='card'>
+                <div class="card-header">
+                    @if(isset( $review->subject ))
+                        <b>{{ $review->subject->name }}</b>
+                    @else
+                        <b>{{ $review->class }}</b>
+                    @endif
+                    <div class="row">
+                        <div class="faculty col-md-6">
+                            @if(isset( $review->faculty ))
+                                {{ $review->faculty->name }} {{ $review->faculty->department_name }}
+                            @endif
+                        </div>
+                        <div class="user col-md-6 text-md-right">
+                            @if(isset( $review->user ))
+                                投稿者：{{ $review->user->name }}
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if(isset($review->evaluation))
+                        <div class="evaluation">
+                            <p>成績評価：{{ $review->evaluation->name }}</p>
+                        </div>
+                    @endif
+                    <div class="get_credit">
+                        <p>
+                            単位取得度
+                            <star-rating :star-size="20" :rating="{{ $review->get_credit }}" :read-only=true>
+　                          </star-rating>
+                        </p>
+                    </div>
+                    <div class="adequacy">
+                        <p>
+                            充実度
+　                          <star-rating :star-size="20" :rating="{{ $review->adequacy }}" :read-only=true>
+　                          </star-rating>
+　                      </p>
+                    </div>
+                    <div class="body">
+                        <p>{{ $review->body}}</p>
+                    </div>
+                    <div class="row">
+                            <a class="btn btn-link" href="/">戻る</a>
+                            @if(isset( $review->user ) && Auth::user()->id === $review->user->id)
+                                <a class="btn btn-link" href="/reviews/{{ $review->id }}/edit">編集する</a>
+                            @endif
+                            @if(isset( $review->user ) && Auth::user()->id === $review->user->id)
+                                <form action="/reviews/{{ $review->id }}" id="form_{{ $review->id }}" method="post" style="display:inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" onclick="return Check()" class="btn btn-link">削除する</button> 
+                                </form>
+                            @endif
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="footer">
-            <a href="/">戻る</a>
-        </div>
+        <script>
+            function Check(){
+                if(confirm("削除しますが本当によろしいですか？")){
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        </script>
     </body>
 </html>
 @endsection

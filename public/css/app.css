@@ -2258,7 +2258,7 @@ select.form-control[multiple] {
 }
 
 textarea.form-control {
-  height: auto;
+  height: 10rem;
 }
 
 .form-group {
@@ -5034,6 +5034,7 @@ input[type=button].btn-block {
   padding: 1.25rem;
 }
 
+
 .card-title {
   margin-bottom: 0.75rem;
 }
@@ -5270,6 +5271,7 @@ input[type=button].btn-block {
   padding-left: 0;
   list-style: none;
   border-radius: 0.25rem;
+  margin-top: 0.25rem;
 }
 
 .page-link {
