@@ -7,9 +7,9 @@ use App\Faculty;
 use App\User;
 use App\Evaluation;
 use App\Subject;
+use App\Teacher;
 use Illuminate\Http\Request;
 use App\Http\Requests\ReviewRequest;
-use App\Http\Requests\SubjectRequest;
 
 class ReviewController extends Controller
 {
@@ -49,18 +49,30 @@ class ReviewController extends Controller
         ->with(['subject' => $subject]);
     }
     
-    public function store(Review $review, Subject $subject, ReviewRequest $request, SubjectRequest $request_subject)
+    public function store(Review $review, Subject $subject, Teacher $teacher, ReviewRequest $request)
     {
         $input = $request['review'];
-        $input_subject = $request_subject['subject'];
-        $name = $input_subject['name'];
-        $check = $subject->where('name', "$name" )->first();
         
-        if(is_null($check)){
+        $input_subject = $request['subject'];
+        $subject_name = $input_subject['name'];
+        $subject_check = $subject->where('name', "$subject_name" )->first();
+        
+        if(is_null($subject_check)){
             $subject->fill($input_subject)->save();
             $input += ['subject_id' => $subject->id];
         }else{
-            $input += ['subject_id' => $check->id];
+            $input += ['subject_id' => $subject_check->id];
+        }
+        
+        $input_teacher = $request['teacher'];
+        $teacher_name = $input_teacher['name'];
+        $teacher_check = $teacher->where('name', "$teacher_name" )->first();
+        
+        if(is_null($teacher_check)){
+            $teacher->fill($input_teacher)->save();
+            $input += ['teacher_id' => $teacher->id];
+        }else{
+            $input += ['teacher_id' => $teacher_check->id];
         }
         
         $input += ['user_id' => $request->user()->id];
@@ -68,19 +80,31 @@ class ReviewController extends Controller
         return redirect('/reviews/' . $review->id);
     }
     
-    public function update(ReviewRequest $request, Review $review, SubjectRequest $request_subject, Subject $subject)
+    public function update(ReviewRequest $request, Review $review, Subject $subject, Teacher $teacher)
     {
         if(\Auth::user()->id == $review->user_id){
             $input_review = $request['review'];
-            $input_subject = $request_subject['subject'];
-            $name = $input_subject['name'];
-            $check = $subject->where('name', "$name" )->first();
             
-            if(is_null($check)){
+            $input_subject = $request['subject'];
+            $subject_name = $input_subject['name'];
+            $subject_check = $subject->where('name', "$subject_name" )->first();
+            
+            if(is_null($subject_check)){
                 $subject->fill($input_subject)->save();
                 $input_review += ['subject_id' => $subject->id];
             }else{
-                $input_review += ['subject_id' => $check->id];
+                $input_review += ['subject_id' => $subject_check->id];
+            }
+            
+            $input_teacher = $request['teacher'];
+            $teacher_name = $input_teacher['name'];
+            $teacher_check = $teacher->where('name', "$teacher_name")->first();
+            
+            if(is_null($teacher_check)){
+                $teacher->fill($input_teacher)->save();
+                $input_review += ['teacher_id' => $teacher->id];
+            }else{
+                $input_review += ['teacher_id' => $teacher_check->id];
             }
             
             $input_review += ['user_id' => $request->user()->id];

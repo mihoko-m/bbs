@@ -29,6 +29,7 @@ class Review extends Model
         'user_id',
         'subject_id',
         'evaluation_id',
+        'teacher_id',
     ];
     
     public function faculty()
@@ -49,5 +50,10 @@ class Review extends Model
     public function subject()
     {
         return $this->belongsTo('App\Subject');
+    }
+    
+    public function teacher()
+    {
+        return $this->belongsTo('App\Teacher');
     }
 }
