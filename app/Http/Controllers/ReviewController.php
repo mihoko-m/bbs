@@ -13,9 +13,21 @@ use App\Http\Requests\SubjectRequest;
 
 class ReviewController extends Controller
 {
-    public function index(Review $review)
+    public function index(Review $review, Request $request)
     {
-        return view('reviews/index')->with(['reviews' => $review->getPaginateByLimit()]);
+        
+        $search_subject = $request['search_subject'];
+        
+
+        if ($search_subject) {
+            
+            $reviews = $review->getPaginateBySearch(10, $search_subject);
+        }else{
+            $reviews = $review->getPaginateByLimit();
+        }
+
+        
+        return view('reviews/index')->with(['reviews' => $reviews])->with(['search_subject' => $search_subject]);
     }
     
     public function show(Review $review)
