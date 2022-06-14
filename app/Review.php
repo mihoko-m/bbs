@@ -12,11 +12,29 @@ class Review extends Model
         return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
     
-    public function getPaginateBySearch(int $limit_count, $search_subject)
+    public function getPaginateBySearch(int $limit_count, $search_subject, $search_teacher)
     {
     // updated_atで降順に並べたあと、limitで件数制限をかける
         return $this->whereHas('subject', function ($query) use ($search_subject) {
                 $query->where('name', 'like', '%'.$search_subject.'%');
+            })->whereHas('teacher', function ($query) use ($search_teacher) {
+                $query->where('name', 'like', '%'.$search_teacher.'%');
+            })->paginate($limit_count);
+    }
+    
+    public function getPaginateBySearchSubject(int $limit_count, $search_subject)
+    {
+    // updated_atで降順に並べたあと、limitで件数制限をかける
+        return $this->whereHas('subject', function ($query) use ($search_subject) {
+                $query->where('name', 'like', '%'.$search_subject.'%');
+            })->paginate($limit_count);
+    }
+    
+    public function getPaginateBySearchTeacher(int $limit_count, $search_teacher)
+    {
+    // updated_atで降順に並べたあと、limitで件数制限をかける
+        return $this->whereHas('teacher', function ($query) use ($search_teacher) {
+                $query->where('name', 'like', '%'.$search_teacher.'%');
             })->paginate($limit_count);
     }
     

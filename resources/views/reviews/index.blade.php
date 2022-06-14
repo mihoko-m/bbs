@@ -14,8 +14,10 @@
         <div class="container">
                 <form action="/" method="GET">
                     <div class="input-group">
-                        <input type="search_subject" class="form-control input-group-prepend" placeholder="科目名を入力" name="search_subject" value="@if (isset($search_subject)) {{ $search_subject }} @endif"></input>
-                        <input type="search_teacher" class="form-control input group-prepend" placeholder="講師名を入力" name="search_teacher" value="@if (isset($search_teacher)) {{ $search_teacher }} @endif"></input>
+                        <input type="search_subject" class="form-control input-group-prepend" 
+                        placeholder="科目名を入力" name="search_subject" value="@if (isset($search_subject)) {{ $search_subject }} @endif"></input>
+                        <input type="search_teacher" class="form-control input group-prepend" 
+                        placeholder="講師名を入力" name="search_teacher" value="@if (isset($search_teacher)) {{ $search_teacher }} @endif"></input>
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-search"></i> 検索
                         </button>

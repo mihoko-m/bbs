@@ -17,17 +17,29 @@ class ReviewController extends Controller
     {
         
         $search_subject = $request['search_subject'];
+        $search_teacher = $request['search_teacher'];
         
 
-        if ($search_subject) {
+        if ($search_subject && $search_teacher) {
             
-            $reviews = $review->getPaginateBySearch(10, $search_subject);
-        }else{
+            $reviews = $review->getPaginateBySearch(10, $search_subject, $search_teacher);
+            
+        } else if ($search_subject) {
+            
+            $reviews = $review->getPaginateBySearchSubject(10, $search_subject);
+            
+        } else if ($search_teacher) {
+            
+            $reviews = $review->getPaginateBySearchTeacher(10, $search_teacher);
+            
+        } else {
+            
             $reviews = $review->getPaginateByLimit();
+            
         }
 
         
-        return view('reviews/index')->with(['reviews' => $reviews])->with(['search_subject' => $search_subject]);
+        return view('reviews/index')->with(['reviews' => $reviews])->with(['search_subject' => $search_subject])->with(['search_teacher' => $search_teacher]);
     }
     
     public function show(Review $review)
