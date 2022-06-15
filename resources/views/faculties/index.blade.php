@@ -15,7 +15,7 @@
             <div class="col-md-8">
             <h5>授業評価検索</h5>
             </div>
-                <form action="/" method="GET">
+                <form action="/faculties/{{ $faculty->id }}" method="GET">
                     <div class="input-group">
                         <input type="search_subject" class="form-control input-group-prepend" 
                         placeholder="科目名を入力" name="search_subject" value="@if (isset($search_subject)) {{ $search_subject }} @endif"></input>

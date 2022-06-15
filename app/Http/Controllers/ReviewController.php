@@ -13,7 +13,7 @@ use App\Http\Requests\ReviewRequest;
 
 class ReviewController extends Controller
 {
-    public function index(Review $review, Request $request)
+    public function index(Review $review, Faculty $faculty, Request $request)
     {
         
         $search_subject = $request['search_subject'];
@@ -39,7 +39,8 @@ class ReviewController extends Controller
         }
 
         
-        return view('reviews/index')->with(['reviews' => $reviews])->with(['search_subject' => $search_subject])->with(['search_teacher' => $search_teacher]);
+        return view('reviews/index')->with(['reviews' => $reviews])->with(['faculties' => $faculty->get()])
+        ->with(['search_subject' => $search_subject])->with(['search_teacher' => $search_teacher]);
     }
     
     public function show(Review $review)
