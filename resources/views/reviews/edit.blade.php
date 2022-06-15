@@ -55,7 +55,7 @@
                                         <div class="col-md-8">
                                             @foreach($evaluations as $evaluation)
                                                 <input type="radio" name="review[evaluation_id]" value="{{ $evaluation->id }}"/>
-                                                    <small>{{ $evaluation->name }}</small>
+                                                    {{ $evaluation->name }}
                                             @endforeach
                                         </div>
                                 </div>

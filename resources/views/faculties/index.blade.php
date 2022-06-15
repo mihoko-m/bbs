@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <title>授業評価一覧</title>
+        <title>学部・学科別授業評価一覧</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <script src="https://kit.fontawesome.com/448df20bce.js" crossorigin="anonymous"></script>
@@ -28,7 +28,10 @@
                 </form>
             <br>
             <div class="col-md-8">
-                <h5>授業評価一覧</h5>
+                <h5>{{ $faculty->name }} {{ $faculty->department_name }} 授業評価一覧</h5>
+                @if(sizeof($reviews)==0)
+                    <p>まだ投稿はありません。</p>
+                @endif
             </div>
             <div class="row">
                 <div class='reviews col-md-8'>
@@ -78,7 +81,7 @@
                                     </p>
                                 </div>
                                 <div class="text-right">
-                                    <a title ="btn btn-link " href="/reviews/{{ $review->id }}">>>レビューの詳細を見る</a>
+                                    <a title ="btn btn-link" href="/reviews/{{ $review->id }}">>>レビューの詳細を見る</a>
                                 </div>
                             </div>
                         </div>

@@ -8,6 +8,7 @@ use App\User;
 use App\Evaluation;
 use App\Subject;
 use App\Teacher;
+use App\Question;
 use Illuminate\Http\Request;
 use App\Http\Requests\ReviewRequest;
 
@@ -45,7 +46,7 @@ class ReviewController extends Controller
     
     public function show(Review $review)
     {
-        return view('reviews/show')->with(['review' => $review]);
+        return view('reviews/show')->with(['review' => $review])->with(['questions' => $review->questions()->get()]);
     }
     
     public function create(Faculty $faculty, Evaluation $evaluation)

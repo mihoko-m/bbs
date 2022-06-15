@@ -32,7 +32,8 @@ class FacultyController extends Controller
             
         }
         
-        return view('faculties.index')->with(['reviews' => $reviews])->with(['faculties' => $faculty->get()])->with(['faculty' => $faculty])
+        return view('faculties/index')->with(['reviews' => $reviews])->with(['faculties' => $faculty->get()])->with(['faculty' => $faculty])
         ->with(['search_subject' => $search_subject])->with(['search_teacher' => $search_teacher]);;
     }
+    
 }

@@ -74,4 +74,9 @@ class Review extends Model
     {
         return $this->belongsTo('App\Teacher');
     }
+    
+    public function questions()   
+    {
+        return $this->hasMany('App\Question');  
+    }
 }
