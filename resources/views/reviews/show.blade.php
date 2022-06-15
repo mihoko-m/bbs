@@ -85,6 +85,11 @@
                     <div class="card-body">
                         <div class="question-body">
                             {{ $question->body }}
+                            <form action="/reviews/{{ $question->review_id }}/questions/{{ $question->id }}" id="form_{{ $question->id }}" method="post" style="display:inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" onclick="return Check()" class="btn btn-link">削除する</button> 
+                            </form>
                         </div>
                     </div>
                 </div>

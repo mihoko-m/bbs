@@ -22,4 +22,10 @@ class QuestionController extends Controller
         $question->fill($input)->save();
         return redirect('/reviews/' . $review->id);
     }
+    
+    public function delete(Review $review, Question $question)
+    {
+        $question->delete();
+        return redirect('/reviews/' . $review->id);
+    }
 }
