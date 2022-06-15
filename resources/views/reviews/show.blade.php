@@ -57,20 +57,43 @@
                         <p>{{ $review->body}}</p>
                     </div>
                     <div class="row">
-                            <a class="btn btn-link" href="/">戻る</a>
-                            @if(isset( $review->user ) && Auth::user()->id === $review->user->id)
-                                <a class="btn btn-link" href="/reviews/{{ $review->id }}/edit">編集する</a>
+                            <a class="btn btn-link" href="/">トップページに戻る</a>
+                            @if(isset( $review->faculty ))
+                            <a class="btn btn-link" href="/faculties/{{ $review->faculty->id }}">
+                                学部・学科別ページに戻る
+                            </a>
                             @endif
                             @if(isset( $review->user ) && Auth::user()->id === $review->user->id)
+                                <a class="btn btn-link" href="/reviews/{{ $review->id }}/edit">編集する</a>
                                 <form action="/reviews/{{ $review->id }}" id="form_{{ $review->id }}" method="post" style="display:inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" onclick="return Check()" class="btn btn-link">削除する</button> 
                                 </form>
+                            @else
+                                <a class="btn btn-link" href='/questions/{{ $review->id }}/create'>この投稿に質問する</a>
                             @endif
                     </div>
                 </div>
             </div>
+            <br>
+            @foreach ($questions as $question)
+                <div class="card">
+                    <div class="card-header">
+                        {{ $question->user->name }}さんからの質問
+                    </div>
+                    <div class="card-body">
+                        <div class="question-body">
+                            {{ $question->body }}
+                            <form action="/reviews/{{ $question->review_id }}/questions/{{ $question->id }}" id="form_{{ $question->id }}" method="post" style="display:inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" onclick="return Check()" class="btn btn-link">削除する</button> 
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
         <script>
             function Check(){

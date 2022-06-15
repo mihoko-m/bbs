@@ -12,10 +12,14 @@
 */
 
 Route::get('/', 'ReviewController@index');
+Route::get('faculties/{faculty}', 'FacultyController@index');
 Route::group(['middleware' => ['auth','verified']], function(){
     Route::post('/reviews', 'ReviewController@store');
     Route::get('/reviews/create', 'ReviewController@create');
     Route::get('/reviews/{review}/edit', 'ReviewController@edit');
+    Route::get('/questions/{review}/create','QuestionController@create');
+    Route::post('/questions/{review}','QuestionController@store');
+    Route::delete('/reviews/{review}/questions/{question}','QuestionController@delete');
     Route::put('/reviews/{review}', 'ReviewController@update');
     Route::get('/reviews/{review}', 'ReviewController@show');
     Route::delete('/reviews/{review}', 'ReviewController@delete');

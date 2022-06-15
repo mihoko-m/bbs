@@ -22,6 +22,8 @@ class ReviewRequest extends FormRequest
         return [
             'review.class' => 'required|string|max:50',
             'review.body' => 'required|string|max:300',
+            'subject.name' => 'required|string|max:50',
+            'teacher.name' => 'required|string|max:50',
         ];
     }
 }

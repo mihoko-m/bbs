@@ -9,7 +9,33 @@ class Review extends Model
     public function getPaginateByLimit(int $limit_count = 10)
     {
     // updated_atで降順に並べたあと、limitで件数制限をかける
-        return $this::with('faculty')->orderBy('updated_at', 'DESC')->paginate($limit_count);
+        return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
+    }
+    
+    public function getPaginateBySearch(int $limit_count, $search_subject, $search_teacher)
+    {
+    // updated_atで降順に並べたあと、limitで件数制限をかける
+        return $this->whereHas('subject', function ($query) use ($search_subject) {
+                $query->where('name', 'like', '%'.$search_subject.'%');
+            })->whereHas('teacher', function ($query) use ($search_teacher) {
+                $query->where('name', 'like', '%'.$search_teacher.'%');
+            })->orderBy('updated_at', 'DESC')->paginate($limit_count);
+    }
+    
+    public function getPaginateBySearchSubject(int $limit_count, $search_subject)
+    {
+    // updated_atで降順に並べたあと、limitで件数制限をかける
+        return $this->whereHas('subject', function ($query) use ($search_subject) {
+                $query->where('name', 'like', '%'.$search_subject.'%');
+            })->orderBy('updated_at', 'DESC')->paginate($limit_count);
+    }
+    
+    public function getPaginateBySearchTeacher(int $limit_count, $search_teacher)
+    {
+    // updated_atで降順に並べたあと、limitで件数制限をかける
+        return $this->whereHas('teacher', function ($query) use ($search_teacher) {
+                $query->where('name', 'like', '%'.$search_teacher.'%');
+            })->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
     
     protected $fillable = [
@@ -21,6 +47,7 @@ class Review extends Model
         'user_id',
         'subject_id',
         'evaluation_id',
+        'teacher_id',
     ];
     
     public function faculty()
@@ -41,5 +68,15 @@ class Review extends Model
     public function subject()
     {
         return $this->belongsTo('App\Subject');
+    }
+    
+    public function teacher()
+    {
+        return $this->belongsTo('App\Teacher');
+    }
+    
+    public function questions()   
+    {
+        return $this->hasMany('App\Question');  
     }
 }
