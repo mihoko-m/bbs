@@ -16,6 +16,11 @@ class Question extends Model
         return $this->belongsTo('App\User');
     }
     
+    public function answer()
+    {
+        return $this->hasOne('App\Answer');
+    }
+    
     protected $fillable = [
         'body',
         'user_id',

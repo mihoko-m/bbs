@@ -19,6 +19,7 @@ class ReviewController extends Controller
         
         $search_subject = $request['search_subject'];
         $search_teacher = $request['search_teacher'];
+        $order = $request['order'];
         
 
         if ($search_subject && $search_teacher) {
@@ -33,6 +34,14 @@ class ReviewController extends Controller
             
             $reviews = $review->getPaginateBySearchTeacher(10, $search_teacher);
             
+        } else if ($order === "credit") {
+            
+            $reviews = $review->getpaginateByCredit();
+            
+        } else if ($order === "adequacy") {
+            
+            $reviews = $review->getpaginateByAdequacy();
+            
         } else {
             
             $reviews = $review->getPaginateByLimit();
@@ -41,7 +50,7 @@ class ReviewController extends Controller
 
         
         return view('reviews/index')->with(['reviews' => $reviews])->with(['faculties' => $faculty->get()])
-        ->with(['search_subject' => $search_subject])->with(['search_teacher' => $search_teacher]);
+        ->with(['search_subject' => $search_subject])->with(['search_teacher' => $search_teacher])->with(['order' => $order]);
     }
     
     public function show(Review $review)

@@ -93,6 +93,10 @@
                         </div>
                     </div>
                 </div>
+                @if(!isset( $question->answer) && Auth::user()->id === $review->user->id)
+                    <a class="btn btn-link" href="/reviews/{{ $question->review_id }}/questions/{{ $question->id }}/answer/create">回答する</a>
+                @endif
+                <br>
             @endforeach
         </div>
         <script>

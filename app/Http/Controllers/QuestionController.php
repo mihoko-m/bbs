@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\QuestionRequest;
 use App\Question;
 use App\Review;
+use App\Answer;
 
 class QuestionController extends Controller
 {
@@ -27,5 +29,15 @@ class QuestionController extends Controller
     {
         $question->delete();
         return redirect('/reviews/' . $review->id);
+    }
+    
+    public function answercreate(Question $question)
+    {
+        return view('questions/answercreate')->with(['question' => $question]);    
+    }
+    
+    public function answerstore(Question $question, Answer $answer, QuestionRequest $request)
+    {
+        
     }
 }

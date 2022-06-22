@@ -12,6 +12,18 @@ class Review extends Model
         return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
     
+    public function getPaginateByCredit(int $limit_count = 10)
+    {
+    // updated_atで降順に並べたあと、limitで件数制限をかける
+        return $this->orderBy('get_credit', 'DESC')->paginate($limit_count);
+    }
+    
+    public function getPaginateByAdequacy(int $limit_count = 10)
+    {
+    // updated_atで降順に並べたあと、limitで件数制限をかける
+        return $this->orderBy('adequacy', 'DESC')->paginate($limit_count);
+    }
+    
     public function getPaginateBySearch(int $limit_count, $search_subject, $search_teacher)
     {
     // updated_atで降順に並べたあと、limitで件数制限をかける

@@ -25,10 +25,25 @@
                             <i class="fas fa-search"></i> 検索
                         </button>
                     </div>
-                </form>
             <br>
             <div class="col-md-8">
-                <h5>授業評価一覧</h5>
+                <h5>
+                    授業評価一覧
+                    @if (isset($order))
+                        @if($order === "credit")
+                            単位取得度が高い順
+                        @elseif($order === "adequacy")
+                            充実度が高い順
+                        @endif
+                    @else
+                        新着順
+                    @endif
+                </h5>
+                並び替え
+                    <a class="btn btn-link" href="/">新着順</a>
+                    <button type="submit" class="btn btn-link" name="order" value="credit">単位取得度が高い順</button>
+                    <button type="submit" class="btn btn-link" name="order" value="adequacy">充実度が高い順</button>
+                </form>
             </div>
             <div class="row">
                 <div class='reviews col-md-8'>
