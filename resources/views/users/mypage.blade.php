@@ -31,6 +31,7 @@
                                     <p>{{ $user->profile }}</p>
                                 @else
                                     <p>プロフィールはまだ設定されていません。</p>
+                                    <a class="btn btn-link" href="/users/{{Auth::user()->id}}/mypage/create">プロフィールを作成する</a>
                                 @endif
                             </div>
                         </div>

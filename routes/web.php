@@ -20,6 +20,7 @@ Route::group(['middleware' => ['auth','verified']], function(){
     Route::post('/questions/{review}','QuestionController@store');
     Route::get('/questions/{review}/create','QuestionController@create');
     Route::get('/reviews/{review}/questions/{question}/answer/create','QuestionController@answercreate');
+    Route::delete('/reviews/{review}/questions/{question}/answer/{answer}','QuestionController@answerdelete');
     Route::delete('/reviews/{review}/questions/{question}','QuestionController@delete');
     Route::post('/reviews/{review}/questions/{question}','QuestionController@answerstore');
     Route::put('/reviews/{review}', 'ReviewController@update');

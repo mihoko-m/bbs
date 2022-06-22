@@ -85,17 +85,36 @@
                     <div class="card-body">
                         <div class="question-body">
                             {{ $question->body }}
-                            <form action="/reviews/{{ $question->review_id }}/questions/{{ $question->id }}" id="form_{{ $question->id }}" method="post" style="display:inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" onclick="return Check()" class="btn btn-link">削除する</button> 
-                            </form>
+                            @if (Auth::user()->id === $question->user->id)
+                                <form action="/reviews/{{ $review->id }}/questions/{{ $question->id }}" id="form_{{ $question->id }}" method="post" style="display:inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" onclick="return Check()" class="btn btn-link">削除する</button> 
+                                </form>
+                            @endif
                         </div>
                     </div>
+                    <div class="card-header">
+                        {{ $review->user->name }}さんからの回答
+                    </div>
+                    <div class="card-body">
+                        @if(!isset( $question->answer))
+                            <p>回答はまだありません。</p>
+                            @if(Auth::user()->id === $review->user->id)
+                                <a class="btn btn-link" href="/reviews/{{ $review->id }}/questions/{{ $question->id }}/answer/create">回答する</a>
+                            @endif
+                        @elseif(isset( $question->answer))
+                        {{ $question->answer->body }}
+                            @if(Auth::user()->id === $review->user->id)
+                                <form action="/reviews/{{ $review->id }}/questions/{{ $question->id }}/answer/{{ $question->answer->id }}" id="form_{{ $question->id }}" method="post" style="display:inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" onclick="return Check()" class="btn btn-link">削除する</button> 
+                                </form>    
+                            @endif
+                        @endif
+                    </div>
                 </div>
-                @if(!isset( $question->answer) && Auth::user()->id === $review->user->id)
-                    <a class="btn btn-link" href="/reviews/{{ $question->review_id }}/questions/{{ $question->id }}/answer/create">回答する</a>
-                @endif
                 <br>
             @endforeach
         </div>
