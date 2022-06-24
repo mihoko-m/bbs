@@ -101,17 +101,18 @@
                         @if(!isset( $question->answer))
                             <p>回答はまだありません。</p>
                             @if(Auth::user()->id === $review->user->id)
-                                <a class="btn btn-link" href="/reviews/{{ $review->id }}/questions/{{ $question->id }}/answer/create">回答する</a>
+                                <a class="btn btn-link" href="/reviews/{{ $review->id }}/questions/{{ $question->id }}/answers/create">回答する</a>
                             @endif
                         @elseif(isset( $question->answer))
                         {{ $question->answer->body }}
                             @if(Auth::user()->id === $review->user->id)
-                                <form action="/reviews/{{ $review->id }}/questions/{{ $question->id }}/answer/{{ $question->answer->id }}" id="form_{{ $question->id }}" method="post" style="display:inline">
+                                <form action="/reviews/{{ $review->id }}/questions/{{ $question->id }}/answers/{{ $question->answer->id }}" id="form_{{ $question->answer->id }}" method="post" style="display:inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" onclick="return Check()" class="btn btn-link">削除する</button> 
-                                </form>    
+                                </form>
                             @endif
+                        <a class="btn btn-link" href="/reviews/{{ $review->id }}/questions/{{ $question->id }}/answers/{{ $question->answer->id }}">詳細をみる</a>
                         @endif
                     </div>
                 </div>

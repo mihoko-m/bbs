@@ -21,7 +21,7 @@
                                             <p class="body__error" style="color:red">{{ $errors->first('question.body') }}</p>
                                         </div>
                                 </div>
-                                <div class="form-group row mb-0">
+                                <div class="form-group row">
                                     <div class="col-md-8 offset-md-4">
                                         <input type="submit" value="保存" class="btn btn-primary"/>
                                         <a class="btn btn-link" href="/reviews/{{ $review->id }}">戻る</a>

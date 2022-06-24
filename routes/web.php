@@ -19,10 +19,13 @@ Route::group(['middleware' => ['auth','verified']], function(){
     Route::get('/reviews/{review}/edit', 'ReviewController@edit');
     Route::post('/questions/{review}','QuestionController@store');
     Route::get('/questions/{review}/create','QuestionController@create');
-    Route::get('/reviews/{review}/questions/{question}/answer/create','QuestionController@answercreate');
-    Route::delete('/reviews/{review}/questions/{question}/answer/{answer}','QuestionController@answerdelete');
+    Route::get('/reviews/{review}/questions/{question}/answers/create','QuestionController@answercreate');
+    Route::delete('/reviews/{review}/questions/{question}/answers/{answer}/replies/{reply}','QuestionController@replydelete');
+    Route::post('/reviews/{review}/questions/{question}/answers/{answer}/replies','QuestionController@replystore');
+    Route::get('/reviews/{review}/questions/{question}/answers/{answer}','QuestionController@show');
+    Route::delete('/reviews/{review}/questions/{question}/answers/{answer}','QuestionController@answerdelete');
+    Route::post('/reviews/{review}/questions/{question}/answers','QuestionController@answerstore');
     Route::delete('/reviews/{review}/questions/{question}','QuestionController@delete');
-    Route::post('/reviews/{review}/questions/{question}','QuestionController@answerstore');
     Route::put('/reviews/{review}', 'ReviewController@update');
     Route::get('/reviews/{review}', 'ReviewController@show');
     Route::delete('/reviews/{review}', 'ReviewController@delete');

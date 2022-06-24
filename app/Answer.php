@@ -11,6 +11,11 @@ class Answer extends Model
         return $this->belongsTo('App\Question');
     }
     
+    public function replies()   
+    {
+        return $this->hasMany('App\Reply');  
+    }
+    
     protected $fillable = [
         'body',
         'question_id',
