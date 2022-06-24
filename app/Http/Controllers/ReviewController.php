@@ -55,7 +55,7 @@ class ReviewController extends Controller
     
     public function show(Review $review)
     {
-        return view('reviews/show')->with(['review' => $review])->with(['questions' => $review->questions()->get()]);
+        return view('reviews/show')->with(['review' => $review])->with(['questions' => $review->questions()->orderBy('created_at', 'DESC')->get()]);
     }
     
     public function create(Faculty $faculty, Evaluation $evaluation)

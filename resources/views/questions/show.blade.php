@@ -18,6 +18,9 @@
             <div class="card">
                 <div class="card-header">
                     {{ $question->user->name }}さんからの質問
+                    <div class="text-right">
+                        投稿日時：{{ $question->created_at }}
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="question-body">
@@ -33,6 +36,11 @@
                 </div>
                 <div class="card-header">
                     {{ $review->user->name }}さんからの回答
+                    @if(isset($question->answer))
+                        <div class="text-right">
+                            投稿日時：{{ $question->answer->created_at }}
+                        </div>
+                    @endif
                 </div>
                 <div class="card-body">
                     @if(!isset( $question->answer))
@@ -53,7 +61,14 @@
                 </div>
                 @foreach ($replies as $reply)
                     <div class="card-header">
-                        {{ $reply->user->name }}
+                        <div class="row">
+                            <div class="reply-name col-md-6">
+                                {{ $reply->user->name }}
+                            </div>
+                            <div class="reply-created_at col-md-6 text-md-right">
+                                投稿日時：{{ $reply->created_at }}
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         {{ $reply->body }}
