@@ -40,7 +40,7 @@
                     @endif
                 </h5>
                 並び替え
-                    <a class="btn btn-link" href="/">新着順</a>
+                    <button type="submit" class="btn btn-link" name="order" value="new">新着順</button>
                     <button type="submit" class="btn btn-link" name="order" value="credit">単位取得度が高い順</button>
                     <button type="submit" class="btn btn-link" name="order" value="adequacy">充実度が高い順</button>
                 </form>

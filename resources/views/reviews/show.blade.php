@@ -55,22 +55,17 @@
                         <p>{{ $review->body}}</p>
                     </div>
                     <div class="row">
-                            <a class="btn btn-link" href="/">トップページに戻る</a>
-                            @if(isset( $review->faculty ))
-                            <a class="btn btn-link" href="/faculties/{{ $review->faculty->id }}">
-                                学部・学科別ページに戻る
+                            <a class="btn btn-link col-md-4" href="/" role="button">トップページに戻る</a>
+                            <a class="btn btn-link col-md-4" href="/faculties/{{ $review->faculty->id }}" role="button">学部・学科別ページに戻る</a>
+                            <a class="btn btn-link col-md-4" href="/?search_subject={{ $review->subject->name }}&search_teacher={{ $review->teacher->name }}" role="button">
+                                同じ講義のレビューをすべてみる
                             </a>
-                            @endif
-                            @if(isset( $review->user ) && Auth::user()->id === $review->user->id)
-                                <a class="btn btn-link" href="/reviews/{{ $review->id }}/edit">編集する</a>
-                                <form action="/reviews/{{ $review->id }}" id="form_{{ $review->id }}" method="post" style="display:inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" onclick="return Check()" class="btn btn-link">削除する</button> 
-                                </form>
-                            @else
-                                <a class="btn btn-link" href='/questions/{{ $review->id }}/create'>この投稿に質問する</a>
-                            @endif
+                        <div class="w-100"></div>
+                    @if(isset( $review->user ) && Auth::user()->id === $review->user->id)
+                        <a class="btn btn-link" href="/reviews/{{ $review->id }}/edit" role="button">編集する</a>
+                    @else
+                        <a class="btn btn-link" href='/questions/{{ $review->id }}/create'>この投稿に質問する</a>
+                    @endif
                     </div>
                 </div>
             </div>
@@ -90,7 +85,7 @@
                                 <form action="/reviews/{{ $review->id }}/questions/{{ $question->id }}" id="form_{{ $question->id }}" method="post" style="display:inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" onclick="return Check()" class="btn btn-link">削除する</button> 
+                                    <button type="submit" onclick="return Check()" class="btn btn-dark">削除する</button> 
                                 </form>
                             @endif
                         </div>
@@ -118,12 +113,19 @@
                                     <button type="submit" onclick="return Check()" class="btn btn-link">削除する</button> 
                                 </form>
                             @endif
-                        <a class="btn btn-link" href="/reviews/{{ $review->id }}/questions/{{ $question->id }}/answers/{{ $question->answer->id }}">詳細をみる</a>
+                        <a class="btn btn-link" href="/reviews/{{ $review->id }}/questions/{{ $question->id }}/answers/{{ $question->answer->id }}" role="button">詳細をみる</a>
                         @endif
                     </div>
                 </div>
                 <br>
             @endforeach
+            @if(isset( $review->user ) && Auth::user()->id === $review->user->id)
+                <form action="/reviews/{{ $review->id }}" id="form_{{ $review->id }}" method="post" style="display:inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" onclick="return Check()" class="btn btn-dark col">削除する</button> 
+                </form>
+            @endif
         </div>
         <script>
             function Check(){

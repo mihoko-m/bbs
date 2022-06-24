@@ -14,13 +14,13 @@ class Review extends Model
     
     public function getPaginateByCredit(int $limit_count = 10)
     {
-    // updated_atで降順に並べたあと、limitで件数制限をかける
+    // get_creditで降順に並べたあと、limitで件数制限をかける
         return $this->orderBy('get_credit', 'DESC')->paginate($limit_count);
     }
     
     public function getPaginateByAdequacy(int $limit_count = 10)
     {
-    // updated_atで降順に並べたあと、limitで件数制限をかける
+    // adequacyで降順に並べたあと、limitで件数制限をかける
         return $this->orderBy('adequacy', 'DESC')->paginate($limit_count);
     }
     
@@ -34,6 +34,26 @@ class Review extends Model
             })->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
     
+    public function getPaginateBySearchCredit(int $limit_count, $search_subject, $search_teacher)
+    {
+    // get_creditで降順に並べたあと、limitで件数制限をかける
+        return $this->whereHas('subject', function ($query) use ($search_subject) {
+                $query->where('name', 'like', '%'.$search_subject.'%');
+            })->whereHas('teacher', function ($query) use ($search_teacher) {
+                $query->where('name', 'like', '%'.$search_teacher.'%');
+            })->orderBy('get_credit', 'DESC')->paginate($limit_count);
+    }
+    
+    public function getPaginateBySearchAdequacy(int $limit_count, $search_subject, $search_teacher)
+    {
+    // adequacyで降順に並べたあと、limitで件数制限をかける
+        return $this->whereHas('subject', function ($query) use ($search_subject) {
+                $query->where('name', 'like', '%'.$search_subject.'%');
+            })->whereHas('teacher', function ($query) use ($search_teacher) {
+                $query->where('name', 'like', '%'.$search_teacher.'%');
+            })->orderBy('adequacy', 'DESC')->paginate($limit_count);
+    }
+    
     public function getPaginateBySearchSubject(int $limit_count, $search_subject)
     {
     // updated_atで降順に並べたあと、limitで件数制限をかける
@@ -42,12 +62,44 @@ class Review extends Model
             })->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
     
+    public function getPaginateBySearchSubjectCredit(int $limit_count, $search_subject)
+    {
+    // get_creditで降順に並べたあと、limitで件数制限をかける
+        return $this->whereHas('subject', function ($query) use ($search_subject) {
+                $query->where('name', 'like', '%'.$search_subject.'%');
+            })->orderBy('get_credit', 'DESC')->paginate($limit_count);
+    }
+    
+    public function getPaginateBySearchSubjectAdequacy(int $limit_count, $search_subject)
+    {
+    // adequacyで降順に並べたあと、limitで件数制限をかける
+        return $this->whereHas('subject', function ($query) use ($search_subject) {
+                $query->where('name', 'like', '%'.$search_subject.'%');
+            })->orderBy('adequacy', 'DESC')->paginate($limit_count);
+    }
+    
     public function getPaginateBySearchTeacher(int $limit_count, $search_teacher)
     {
     // updated_atで降順に並べたあと、limitで件数制限をかける
         return $this->whereHas('teacher', function ($query) use ($search_teacher) {
                 $query->where('name', 'like', '%'.$search_teacher.'%');
             })->orderBy('updated_at', 'DESC')->paginate($limit_count);
+    }
+    
+    public function getPaginateBySearchTeacherCredit(int $limit_count, $search_teacher)
+    {
+    // get_creditで降順に並べたあと、limitで件数制限をかける
+        return $this->whereHas('teacher', function ($query) use ($search_teacher) {
+                $query->where('name', 'like', '%'.$search_teacher.'%');
+            })->orderBy('get_credit', 'DESC')->paginate($limit_count);
+    }
+    
+    public function getPaginateBySearchTeacherAdequacy(int $limit_count, $search_teacher)
+    {
+    // adequacyで降順に並べたあと、limitで件数制限をかける
+        return $this->whereHas('teacher', function ($query) use ($search_teacher) {
+                $query->where('name', 'like', '%'.$search_teacher.'%');
+            })->orderBy('adequacy', 'DESC')->paginate($limit_count);
     }
     
     protected $fillable = [
