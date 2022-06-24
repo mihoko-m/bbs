@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Question extends Model
+class Reply extends Model
 {
-    public function rerview()
+    public function answer()
     {
-        return $this->belongsTo('App\Review');
+        return $this->belongsTo('App\Answer');
     }
     
     public function user()
@@ -16,14 +16,9 @@ class Question extends Model
         return $this->belongsTo('App\User');
     }
     
-    public function answer()
-    {
-        return $this->hasOne('App\Answer');
-    }
-    
     protected $fillable = [
         'body',
+        'answer_id',
         'user_id',
-        'review_id',
     ];
 }

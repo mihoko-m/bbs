@@ -11,6 +11,16 @@ class Faculty extends Model
         return $this->reviews()->with('faculty')->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
     
+    public function getPaginateByFacultyCredit(int $limit_count = 10)
+    {
+        return $this->reviews()->with('faculty')->orderBy('get_credit', 'DESC')->paginate($limit_count);
+    }
+    
+    public function getPaginateByFacultyAdequacy(int $limit_count = 10)
+    {
+        return $this->reviews()->with('faculty')->orderBy('adequacy', 'DESC')->paginate($limit_count);
+    }
+    
     public function getPaginateByFacultySearch(int $limit_count, $search_subject, $search_teacher)
     {
     // updated_atで降順に並べたあと、limitで件数制限をかける

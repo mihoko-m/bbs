@@ -25,10 +25,33 @@
                             <i class="fas fa-search"></i> 検索
                         </button>
                     </div>
-                </form>
             <br>
             <div class="col-md-8">
-                <h5>授業評価一覧</h5>
+                <h5>
+                    授業評価一覧
+                    @if (isset($order))
+                        @if($order === "credit")
+                            単位取得度が高い順
+                        @elseif($order === "adequacy")
+                            充実度が高い順
+                        @endif
+                    @else
+                        新着順
+                    @endif
+                </h5>
+                並び替え
+                    <a class="btn btn-link" href="/">新着順</a>
+                    <button type="submit" class="btn btn-link" name="order" value="credit">単位取得度が高い順</button>
+                    <button type="submit" class="btn btn-link" name="order" value="adequacy">充実度が高い順</button>
+                </form>
+            
+            @if (count($reviews) >0)
+                <p>全{{ $reviews->total() }}件中 
+                {{  ($reviews->currentPage() -1) * $reviews->perPage() + 1}} - 
+                {{ (($reviews->currentPage() -1) * $reviews->perPage() + 1) + (count($reviews) -1)  }}件のデータが表示されています。</p>
+            @else
+                <p>データがありません。</p>
+            @endif 
             </div>
             <div class="row">
                 <div class='reviews col-md-8'>
@@ -54,10 +77,13 @@
                                                 {{ $review->faculty->name }} {{ $review->faculty->department_name }}
                                             </a>
                                         @endif
+                                        @if(isset( $review->teacher ))
+                                            {{ $review->teacher->name }}先生
+                                        @endif
                                     </div>
                                     <div class="user col-md-6 text-md-right">
                                         @if(isset( $review->user ))
-                                            投稿者：{{ $review->user->name }}
+                                            投稿者：<a href="/users/{{ $review->user->id }}/mypage">{{ $review->user->name }}</a>
                                         @endif
                                     </div>
                                 </div>
