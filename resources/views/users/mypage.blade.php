@@ -16,7 +16,7 @@
             <div class="title">
                 <h5>{{ $user->name }}さんのマイページ</h5>
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
                                 {{ $user->name }}さんのプロフィール
@@ -41,10 +41,15 @@
                     </div>
                 </div>
                 <br>
-                <h5>投稿一覧</h5>
+                <h5 class="col-md-12">投稿一覧</h5>
             </div>
             <div class="row">
-                <div class='reviews col-md-8'>
+                <div class="reviews col-md-12">
+                    @if( Auth::user()->id === $user->id )
+                    <div class="text-md-right">
+                        <a class="btn btn-primary" href='/reviews/create'>新規投稿する</a>
+                    </div>
+                    @endif
                     @foreach ($reviews as $review)
                         <div class='card'>
                             <div class="card-header">
@@ -92,9 +97,6 @@
             <div class='pagination'>
                 {{ $reviews->links() }}
             </div>
-            @if( Auth::user()->id === $user->id )
-                <a class="btn btn-primary" href='/reviews/create'>新規投稿する</a>
-            @endif
         </div>
     </body>
 </html>

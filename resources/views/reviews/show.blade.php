@@ -110,7 +110,7 @@
                                 <form action="/reviews/{{ $review->id }}/questions/{{ $question->id }}/answers/{{ $question->answer->id }}" id="form_{{ $question->answer->id }}" method="post" style="display:inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" onclick="return Check()" class="btn btn-link">削除する</button> 
+                                    <button type="submit" onclick="return Check()" class="btn btn-dark">削除する</button> 
                                 </form>
                             @endif
                         <a class="btn btn-link" href="/reviews/{{ $review->id }}/questions/{{ $question->id }}/answers/{{ $question->answer->id }}" role="button">詳細をみる</a>

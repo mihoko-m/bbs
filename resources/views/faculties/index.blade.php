@@ -38,18 +38,21 @@
                         新着順
                     @endif    
                 </h5>
-                並び替え
+                並び替え：
                     <button type="submit" class="btn btn-link" name="order" value="new">新着順</button>
                     <button type="submit" class="btn btn-link" name="order" value="credit">単位取得度が高い順</button>
                     <button type="submit" class="btn btn-link" name="order" value="adequacy">充実度が高い順</button>
                 </form>
+                <div class="text-md-right">
                 @if (count($reviews) >0)
-                    <p>全{{ $reviews->total() }}件中 
+                    全{{ $reviews->total() }}件中 
                     {{  ($reviews->currentPage() -1) * $reviews->perPage() + 1}} - 
-                    {{ (($reviews->currentPage() -1) * $reviews->perPage() + 1) + (count($reviews) -1)  }}件のデータが表示されています。</p>
+                    {{ (($reviews->currentPage() -1) * $reviews->perPage() + 1) + (count($reviews) -1)  }}件のデータが表示されています。
                 @else
-                    <p>データがありません。</p>
+                    データがありません...　
                 @endif
+                <a class="btn btn-primary" href='/reviews/create' role="button">新規投稿する</a>
+                </div>
             </div>
             <div class="row">
                 <div class='reviews col-md-8'>
@@ -138,7 +141,6 @@
             <div class='pagination'>
                 {{ $reviews->appends(request()->query())->links() }}
             </div>
-            <a class="btn btn-primary" href='/reviews/create'>新規投稿する</a>
         </div>
     </body>
 </html>
