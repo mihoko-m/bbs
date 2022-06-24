@@ -12,6 +12,7 @@ class FacultyController extends Controller
         
         $search_subject = $request['search_subject'];
         $search_teacher = $request['search_teacher'];
+        $order = $request['order'];
         
 
         if ($search_subject && $search_teacher) {
@@ -26,6 +27,14 @@ class FacultyController extends Controller
             
             $reviews = $faculty->getPaginateByFacultySearchTeacher(10, $search_teacher);
             
+        } else if ($order === "credit") {
+            
+            $reviews = $faculty->getpaginateByFacultyCredit();
+            
+        } else if ($order === "adequacy") {
+            
+            $reviews = $faculty->getpaginateByFacultyAdequacy();
+            
         } else {
             
             $reviews = $faculty->getPaginateByFaculty();
@@ -33,7 +42,7 @@ class FacultyController extends Controller
         }
         
         return view('faculties/index')->with(['reviews' => $reviews])->with(['faculties' => $faculty->get()])->with(['faculty' => $faculty])
-        ->with(['search_subject' => $search_subject])->with(['search_teacher' => $search_teacher]);;
+        ->with(['search_subject' => $search_subject])->with(['search_teacher' => $search_teacher])->with(['order' => $order]);;
     }
     
 }

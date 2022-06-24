@@ -64,6 +64,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Question');  
     }
     
+    public function replies()   
+    {
+        return $this->hasMany('App\Reply');  
+    }
+    
     public function getByUser(int $limit_count = 3)
     {
         return $this->reviews()->with('user')->orderBy('updated_at', 'DESC')->paginate($limit_count);
