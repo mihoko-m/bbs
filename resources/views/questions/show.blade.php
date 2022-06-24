@@ -82,22 +82,23 @@
                     </div>
                 @endforeach
             </div>
-                @if (Auth::user()->id === $question->user->id || Auth::user()->id === $review->user->id)
-                    <br>
-                    <div class="card">
-                        <div class="card-header">
-                            新規リプライ
-                        </div>
-                        <form action="/reviews/{{ $review->id }}/questions/{{ $question->id }}/answers/{{ $question->answer->id }}/replies" method="POST">
-                            @csrf
-                                <textarea class="form-control" name="reply[body]" placeholder="返答内容を300文字以内で入力してください。"></textarea>
-                                <p class="body__error" style="color:red">{{ $errors->first('reply.body') }}</p>
-                                <div class="text-right">
-                                    <input type="submit" value="返答する" class="btn btn-link"/>
-                                </div>
-                        </form>
+            @if ((sizeof($replies)==0 && Auth::user()->id === $question->user->id)
+            || (!sizeof($replies)==0 && (Auth::user()->id === $question->user->id || Auth::user()->id === $review->user->id)))
+                <br>
+                <div class="card">
+                    <div class="card-header">
+                        新規リプライ
                     </div>
-                @endif
+                    <form action="/reviews/{{ $review->id }}/questions/{{ $question->id }}/answers/{{ $question->answer->id }}/replies" method="POST">
+                        @csrf
+                            <textarea class="form-control" name="reply[body]" placeholder="返答内容を300文字以内で入力してください。"></textarea>
+                            <p class="body__error" style="color:red">{{ $errors->first('reply.body') }}</p>
+                            <div class="text-right">
+                                <input type="submit" value="返答する" class="btn btn-link"/>
+                            </div>
+                    </form>
+                </div>
+            @endif
         </div>
         <script>
             function Check(){
