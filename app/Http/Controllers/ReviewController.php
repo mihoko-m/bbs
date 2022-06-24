@@ -104,7 +104,6 @@ class ReviewController extends Controller
     
     public function update(Review $review, Subject $subject, Teacher $teacher, ReviewRequest $request)
     {
-        dd(1);
         if(\Auth::user()->id == $review->user_id){
             $input_review = $request['review'];
             

@@ -51,7 +51,6 @@ class Review extends Model
     }
     
     protected $fillable = [
-        'class',
         'body',
         'adequacy',
         'get_credit',

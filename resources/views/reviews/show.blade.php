@@ -17,8 +17,6 @@
                 <div class="card-header">
                     @if(isset( $review->subject ))
                         <b>{{ $review->subject->name }}</b>
-                    @else
-                        <b>{{ $review->class }}</b>
                     @endif
                     <div class="row">
                         <div class="faculty col-md-6">
