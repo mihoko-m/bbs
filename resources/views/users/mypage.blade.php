@@ -23,15 +23,18 @@
                             </div>
                             <div class="card-body">
                                 @if(isset( $user->faculty ) && isset( $user->profile ))
-                                    <p>所属学部学科：{{ $user->faculty->name }}</p>
-                                    <p>プロフィール：{{ $user->profile }}</p>
+                                    <p>所属学部学科：{{ $user->faculty->name }} {{ $user->faculty->department_name }}</p>
+                                    <p>{{ $user->profile }}</p>
                                 @elseif(isset( $user->faculty))
                                     <p>所属学部学科：{{ $user->faculty->name }}</p>    
                                 @elseif(isset( $user->profile))
                                     <p>{{ $user->profile }}</p>
                                 @else
                                     <p>プロフィールはまだ設定されていません。</p>
-                                    <a class="btn btn-link" href="/users/{{Auth::user()->id}}/mypage/create">プロフィールを作成する</a>
+                                @endif
+                                
+                                @if( Auth::user()->id === $user->id )
+                                    <a class="btn btn-link" href="/users/{{Auth::user()->id}}/mypage/edit">プロフィールを編集する</a>
                                 @endif
                             </div>
                         </div>
@@ -89,6 +92,9 @@
             <div class='pagination'>
                 {{ $reviews->links() }}
             </div>
+            @if( Auth::user()->id === $user->id )
+                <a class="btn btn-primary" href='/reviews/create'>新規投稿する</a>
+            @endif
         </div>
     </body>
 </html>

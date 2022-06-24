@@ -38,14 +38,18 @@
                         新着順
                     @endif    
                 </h5>
-                @if(sizeof($reviews)==0)
-                    <p>まだ投稿はありません。</p>
-                @endif
                 並び替え
                     <a class="btn btn-link" href="/faculties/{{ $faculty->id }}">新着順</a>
                     <button type="submit" class="btn btn-link" name="order" value="credit">単位取得度が高い順</button>
                     <button type="submit" class="btn btn-link" name="order" value="adequacy">充実度が高い順</button>
                 </form>
+                @if (count($reviews) >0)
+                    <p>全{{ $reviews->total() }}件中 
+                    {{  ($reviews->currentPage() -1) * $reviews->perPage() + 1}} - 
+                    {{ (($reviews->currentPage() -1) * $reviews->perPage() + 1) + (count($reviews) -1)  }}件のデータが表示されています。</p>
+                @else
+                    <p>データがありません。</p>
+                @endif
             </div>
             <div class="row">
                 <div class='reviews col-md-8'>

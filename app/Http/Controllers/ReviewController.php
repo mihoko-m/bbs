@@ -63,13 +63,12 @@ class ReviewController extends Controller
         return view('reviews/create')->with(['faculties' => $faculty->get()])->with(['evaluations' => $evaluation->get()]);
     }
     
-    public function edit(Review $review, Faculty $faculty, Evaluation $evaluation, Subject $subject)
+    public function edit(Review $review, Faculty $faculty, Evaluation $evaluation)
     {
         return view('reviews/edit')
         ->with(['review' => $review])
         ->with(['faculties' => $faculty->get()])
-        ->with(['evaluations' => $evaluation->get()])
-        ->with(['subject' => $subject]);
+        ->with(['evaluations' => $evaluation->get()]);
     }
     
     public function store(Review $review, Subject $subject, Teacher $teacher, ReviewRequest $request)
@@ -103,8 +102,9 @@ class ReviewController extends Controller
         return redirect('/reviews/' . $review->id);
     }
     
-    public function update(ReviewRequest $request, Review $review, Subject $subject, Teacher $teacher)
+    public function update(Review $review, Subject $subject, Teacher $teacher, ReviewRequest $request)
     {
+        dd(1);
         if(\Auth::user()->id == $review->user_id){
             $input_review = $request['review'];
             

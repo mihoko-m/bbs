@@ -25,12 +25,16 @@ class QuestionController extends Controller
     
     public function store(Review $review, Question $question, QuestionRequest $request)
     {
-        $input = $request['question'];
-        $input += ['user_id' => $request->user()->id];
-        $input += ['review_id' => $review->id];
+        if(\Auth::user()->id != $review->user_id){
+            $input = $request['question'];
+            $input += ['user_id' => $request->user()->id];
+            $input += ['review_id' => $review->id];
         
-        $question->fill($input)->save();
-        return redirect('/reviews/' . $review->id);
+            $question->fill($input)->save();
+            return redirect('/reviews/' . $review->id);
+        }else{
+            abort(403, '権限がありません');
+        }
     }
     
     public function replystore(Review $review, Question $question, Answer $answer, Reply $reply, ReplyRequest $request)

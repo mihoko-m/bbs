@@ -93,7 +93,7 @@
                                 <div class="form-group row">
                                     <div class="col-md-8 offset-md-4">
                                         <input type="submit" value="保存" class="btn btn-primary"/>
-                                        <a class="btn btn-link" href="/">戻る</a>
+                                        <a class="btn btn-link" href="/reviews/{{ $review->id }}">戻る</a>
                                     </div>
                                 </div>
                             </div>
