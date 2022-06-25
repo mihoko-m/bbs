@@ -43,15 +43,15 @@
                     <button type="submit" class="btn btn-link" name="order" value="credit">単位取得度が高い順</button>
                     <button type="submit" class="btn btn-link" name="order" value="adequacy">充実度が高い順</button>
                 </form>
-                <div class="text-md-right">
                 @if (count($reviews) >0)
+                <div class="text-md-right">
                     全{{ $reviews->total() }}件中 
                     {{  ($reviews->currentPage() -1) * $reviews->perPage() + 1}} - 
-                    {{ (($reviews->currentPage() -1) * $reviews->perPage() + 1) + (count($reviews) -1)  }}件のデータが表示されています。
+                    {{ (($reviews->currentPage() -1) * $reviews->perPage() + 1) + (count($reviews) -1)  }}件
                 @else
-                    データがありません...　
+                <div>
+                    データがありません　
                 @endif
-                <a class="btn btn-primary" href='/reviews/create' role="button">新規投稿する</a>
                 </div>
             </div>
             <div class="row">
@@ -110,20 +110,6 @@
                     <br>
                 </div>
                 <div class="contents col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            コンテンツ
-                        </div>
-                        <div class="card-body">
-                            <div>
-                                <a>>単位取得度ランキング</a>
-                            </div>
-                            <div>
-                                <a>>充実度ランキング</a>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
                     <div class="card">
                         <div class="card-header">
                             学部・学科別
