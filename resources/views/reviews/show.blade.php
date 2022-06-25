@@ -64,7 +64,7 @@
                     @if(isset( $review->user ) && Auth::user()->id === $review->user->id)
                         <a class="btn btn-link col-md-4" href="/reviews/{{ $review->id }}/edit" role="button">編集する</a>
                     @else
-                        <a class="btn btn-link" href='/questions/{{ $review->id }}/create'>この投稿に質問する</a>
+                        <a class="btn btn-link col-md-4" href='/questions/{{ $review->id }}/create'>この投稿に質問する</a>
                     @endif
                     </div>
                 </div>

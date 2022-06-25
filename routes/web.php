@@ -13,6 +13,8 @@
 
 Route::get('/', 'ReviewController@index');
 Route::get('faculties/{faculty}', 'FacultyController@index');
+Route::get('login/{provider}', 'SocialLoginController@redirectToProvider');
+Route::get('login/{provider}/callback', 'SocialLoginController@handleProviderCallback');
 Route::group(['middleware' => ['auth','verified']], function(){
     Route::post('/reviews', 'ReviewController@store');
     Route::get('/reviews/create', 'ReviewController@create');

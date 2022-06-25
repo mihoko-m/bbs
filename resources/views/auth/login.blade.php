@@ -56,6 +56,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     ログイン
                                 </button>
+                                
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
@@ -65,6 +66,11 @@
                             </div>
                         </div>
                     </form>
+                    <br>
+                    <div class="text-center">
+                    <a href="/login/twitter"  class="btn btn-outline-info" role="button">Log in with twitter</a>
+                    <a href="/login/google"  class="btn btn-outline-primary" role="button">Log in with google</a>
+                    </div>
                 </div>
             </div>
         </div>
