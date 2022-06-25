@@ -43,6 +43,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href='/reviews/create'>新規投稿</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLScmTLjs8G64ESn3UyaI2ueIzygeQHQ0vl47Pj_ISJIfOSIyfw/viewform?usp=sf_link">
+                                お問い合わせ
+                            </a>
+                        </li>
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">ログイン</a>

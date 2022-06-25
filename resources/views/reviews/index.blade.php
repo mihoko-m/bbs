@@ -126,6 +126,24 @@
                             @endforeach
                         </div>
                     </div>
+                    <br>
+                    <div class="card">
+                        <div class="card-header">
+                            リンク
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <a class="btn btn-link" target="_blank" href="https://info.kansai-u.ac.jp/login">
+                                    関西大学インフォメーションシステム
+                                </a>
+                            </div>
+                            <div>
+                                <a class="btn btn-link" target="_blank" href="https://syllabus3.jm.kansai-u.ac.jp/syllabus/search/curri/CurriSearchTop.html">
+                                    関西大学シラバスシステム
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class='pagination'>
