@@ -13,21 +13,18 @@
 @section('content')
     <body>
         <div class="container">
+            <a class="btn btn-link" href="/" role="button"><<トップページに戻る</a>
+            <a class="btn btn-link" href="/faculties/{{ $review->faculty->id }}" role="button"><<学部・学科別ページに戻る</a>
             <div class='card'>
                 <div class="card-header">
-                    @if(isset( $review->subject ))
                         <b>{{ $review->subject->name }}</b>
-                    @endif
                     <div class="row">
                         <div class="faculty col-md-6">
-                            @if(isset( $review->faculty ))
                                 {{ $review->faculty->name }} {{ $review->faculty->department_name }}
-                            @endif
                         </div>
                         <div class="user col-md-6 text-md-right">
-                            @if(isset( $review->user ))
-                                投稿者：{{ $review->user->name }}
-                            @endif
+                                <i class="fa-solid fa-circle-user fa-lg"></i>
+                                <a href="/users/{{ $review->user->id }}">{{ $review->user->name }}</a>
                         </div>
                     </div>
                 </div>
@@ -54,19 +51,36 @@
                     <div class="body">
                         <p>{{ $review->body}}</p>
                     </div>
+                    <br>
                     <div class="row">
-                            <a class="btn btn-link col-md-4" href="/" role="button">トップページに戻る</a>
-                            <a class="btn btn-link col-md-4" href="/faculties/{{ $review->faculty->id }}" role="button">学部・学科別ページに戻る</a>
                             <a class="btn btn-link col-md-4" href="/?search_subject={{ $review->subject->name }}&search_teacher={{ $review->teacher->name }}" role="button">
                                 同じ講義のレビューをすべてみる
                             </a>
-                        <div class="w-100"></div>
                     @if(isset( $review->user ) && Auth::user()->id === $review->user->id)
                         <a class="btn btn-link col-md-4" href="/reviews/{{ $review->id }}/edit" role="button">編集する</a>
                     @else
                         <a class="btn btn-link col-md-4" href='/questions/{{ $review->id }}/create'>この投稿に質問する</a>
                     @endif
                     </div>
+                    @if($review->users()->where('user_id', Auth::id())->exists())
+                        <div class="text-right">
+                            <form action="/reviews/{{ $review->id }}/unfavorites" method="POST" name="favorites">
+                                @csrf
+                                <button type="submit" class="btn btn-link">
+                                    <i class="fa-solid fa-heart fa-lg"></i>
+                                </button>
+                            </form>
+                        </div>
+                    @else
+                        <div class="text-right">
+                            <form action="/reviews/{{ $review->id }}/favorites" method="POST" name="unfavorites">
+                                @csrf
+                                <button type="submit" class="btn btn-link">
+                                    <i class="fa-regular fa-heart fa-lg"></i>
+                                </button>
+                            </form>
+                        </div>
+                    @endif
                 </div>
             </div>
             <br>

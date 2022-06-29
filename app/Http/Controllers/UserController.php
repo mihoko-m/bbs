@@ -10,9 +10,9 @@ use App\Review;
 
 class UserController extends Controller
 {
-    public function mypage(User $user, Review $review)
+    public function show(User $user, Review $review)
     {
-        return view('users/mypage')->with(['user' => $user])->with(['reviews' => $user->getByUser()]);
+        return view('users/show')->with(['user' => $user])->with(['reviews' => $user->getByUser()]);
     }
     
     public function edit(User $user, Faculty $faculty)
@@ -26,7 +26,7 @@ class UserController extends Controller
             $input_user = $request['user'];
             $user->fill($input_user)->save();
 
-            return redirect('/users/' . $user->id . '/mypage');
+            return redirect('/users/' . $user->id);
         }else{
             abort(403, '権限がありません');
         }

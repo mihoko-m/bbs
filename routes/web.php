@@ -28,11 +28,13 @@ Route::group(['middleware' => ['auth','verified']], function(){
     Route::delete('/reviews/{review}/questions/{question}/answers/{answer}','QuestionController@answerdelete');
     Route::post('/reviews/{review}/questions/{question}/answers','QuestionController@answerstore');
     Route::delete('/reviews/{review}/questions/{question}','QuestionController@delete');
+    Route::post('/reviews/{review}/favorites', 'FavoriteController@store');
+    Route::post('/reviews/{review}/unfavorites', 'FavoriteController@destroy');
     Route::put('/reviews/{review}', 'ReviewController@update');
     Route::get('/reviews/{review}', 'ReviewController@show');
     Route::delete('/reviews/{review}', 'ReviewController@delete');
     Route::get('/users/{user}/mypage/edit', 'UserController@edit');
-    Route::get('/users/{user}/mypage', 'UserController@mypage');
+    Route::get('/users/{user}', 'UserController@show');
     Route::put('users/{user}','UserController@update');
 });
 Auth::routes(['verify' => true]);

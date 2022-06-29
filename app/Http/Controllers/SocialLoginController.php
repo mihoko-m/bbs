@@ -25,17 +25,11 @@ class SocialLoginController extends Controller
             // エラーならログイン画面へ転送
         }
         
-        if($provider === "twitter"){
-            dd($user);
-            /*$myinfo = User::firstOrCreate(['provider_id' => $user->id ],
-                ['name' => $user->name,'email' => $user->email,'email_verified_at' => now()]);
-                Auth::login($myinfo, true);
-                return redirect()->to('/'); // homeへ転送*/
-        }elseif($provider === "google"){
+        if($provider === "google"){
             $myinfo = User::firstOrCreate(['provider_id' => $user->id],
                 ['name' => $user->name, 'email' => $user->email, 'email_verified_at' => now() ]);
                 Auth::login($myinfo, true);
-                return redirect()->to('/'); // homeへ転送
+                return redirect()->to('/'); // トップページへ転送
         }
     }
 }

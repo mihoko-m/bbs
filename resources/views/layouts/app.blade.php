@@ -13,6 +13,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/bbs.js') }}" defer></script>
     <script src="https://unpkg.com/vue-star-rating/dist/VueStarRating.umd.min.js"></script>
+    <script src="https://kit.fontawesome.com/448df20bce.js" crossorigin="anonymous"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -70,7 +71,7 @@
                                                      document.getElementById('logout-form').submit();">
                                         ログアウト
                                     </a>
-                                    <a class="dropdown-item" href="/users/{{Auth::user()->id}}/mypage">マイページ</a>
+                                    <a class="dropdown-item" href="/users/{{Auth::user()->id}}">マイページ</a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf

@@ -68,8 +68,7 @@
                     </form>
                     <br>
                     <div class="text-center">
-                    <a href="/login/twitter"  class="btn btn-outline-info" role="button">Log in with twitter</a>
-                    <a href="/login/google"  class="btn btn-outline-primary" role="button">Log in with google</a>
+                    <a href="/login/google"  class="btn btn-outline-primary" role="button"><i class="fa-brands fa-google fa-lg"></i> Googleアカウントで登録/ログイン</a>
                     </div>
                 </div>
             </div>

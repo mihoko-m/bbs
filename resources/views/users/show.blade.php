@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{{ $user->name }}さんのマイページ</title>
+        <title>{{ $user->name }}さんのページ</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link rel="stylesheet" href="/css/app.css">
@@ -14,7 +14,7 @@
     <body>
         <div class="container">
             <div class="title">
-                <h5>{{ $user->name }}さんのマイページ</h5>
+                <h5>{{ $user->name }}さんのページ</h5>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
@@ -53,21 +53,14 @@
                     @foreach ($reviews as $review)
                         <div class='card'>
                             <div class="card-header">
-                                @if(isset( $review->subject ))
-                                    <b>{{ $review->subject->name }}</b>
-                                @else
-                                    <b>{{ $review->class }}</b>
-                                @endif
+                                <b>{{ $review->subject->name }}</b>
                                 <div class="row">
                                     <div class="faculty col-md-6">
-                                        @if(isset( $review->faculty ))
-                                            {{ $review->faculty->name }} {{ $review->faculty->department_name }}
-                                        @endif
+                                        {{ $review->faculty->name }} {{ $review->faculty->department_name }}
                                     </div>
                                     <div class="user col-md-6 text-md-right">
-                                        @if(isset( $review->user ))
-                                            投稿者：{{ $review->user->name }}
-                                        @endif
+                                        <i class="fa-solid fa-circle-user fa-lg"></i>
+                                        <a href="/users/{{ $review->user->id }}">{{ $review->user->name }}</a>
                                     </div>
                                 </div>
                             </div>

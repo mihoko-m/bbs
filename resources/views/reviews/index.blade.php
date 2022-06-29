@@ -5,7 +5,6 @@
         <title>授業評価一覧</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/448df20bce.js" crossorigin="anonymous"></script>
     </head>
 @extends('layouts.app')
 
@@ -62,11 +61,7 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="subject col-md-6">
-                                        @if(isset( $review->subject ))
-                                            <b>{{ $review->subject->name }}</b>
-                                        @else
-                                            <b>{{ $review->class }}</b>
-                                        @endif
+                                        <b>{{ $review->subject->name }}</b>
                                     </div>
                                     <div class="time col-md-6 text-md-right">
                                         投稿日時：{{ $review->created_at }}
@@ -74,19 +69,14 @@
                                 </div>
                                 <div class="row">
                                     <div class="faculty col-md-6">
-                                        @if(isset( $review->faculty ))
-                                            <a href="/faculties/{{ $review->faculty->id }}">
-                                                {{ $review->faculty->name }} {{ $review->faculty->department_name }}
-                                            </a>
-                                        @endif
-                                        @if(isset( $review->teacher ))
-                                            {{ $review->teacher->name }}先生
-                                        @endif
+                                        <a href="/faculties/{{ $review->faculty->id }}">
+                                            {{ $review->faculty->name }} {{ $review->faculty->department_name }}
+                                        </a>
+                                        {{ $review->teacher->name }}先生
                                     </div>
                                     <div class="user col-md-6 text-md-right">
-                                        @if(isset( $review->user ))
-                                            投稿者：<a href="/users/{{ $review->user->id }}/mypage">{{ $review->user->name }}</a>
-                                        @endif
+                                        <i class="fa-solid fa-circle-user fa-lg"></i>
+                                        <a href="/users/{{ $review->user->id }}">{{ $review->user->name }}</a>
                                     </div>
                                 </div>
                             </div>

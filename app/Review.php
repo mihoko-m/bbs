@@ -123,6 +123,11 @@ class Review extends Model
         return $this->belongsTo('App\User');
     }
     
+    public function users()
+    {
+        return $this->belongsToMany('App\User')->withTimestamps();
+    }
+    
     public function evaluation()
     {
         return $this->belongsTo('App\Evaluation');

@@ -71,6 +71,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Reply');  
     }
     
+    public function favorites()
+    {
+        return $this->belongsToMany('App\Review')->withTimestamps();
+    }
+    
     public function getByUser(int $limit_count = 3)
     {
         return $this->reviews()->with('user')->orderBy('updated_at', 'DESC')->paginate($limit_count);

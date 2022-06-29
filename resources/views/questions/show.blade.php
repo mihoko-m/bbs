@@ -13,11 +13,11 @@
 @section('content')
     <body>
         <div class="container">
-            <a class="btn btn-link" href="/reviews/{{ $review->id }}"><<レビュー詳細画面に戻る</a>
+            <a class="btn btn-link" href="/reviews/{{ $review->id }}" role="button"><<レビュー詳細画面に戻る</a>
             <h5>質問内容</h5>
             <div class="card">
                 <div class="card-header">
-                    {{ $question->user->name }}さんからの質問
+                    <i class="fa-solid fa-circle-user fa-lg"></i> {{ $question->user->name }}さんからの質問
                     <div class="text-right">
                         投稿日時：{{ $question->created_at }}
                     </div>
@@ -29,13 +29,13 @@
                         <form action="/reviews/{{ $review->id }}/questions/{{ $question->id }}" id="form_{{ $question->id }}" method="post" style="display:inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" onclick="return Check()" class="btn btn-link">削除する</button> 
+                            <button type="submit" onclick="return Check()" class="btn btn-dark">削除する</button> 
                         </form>
                         @endif
                     </div>
                 </div>
                 <div class="card-header">
-                    {{ $review->user->name }}さんからの回答
+                    <i class="fa-solid fa-circle-user fa-lg"></i> {{ $review->user->name }}さんからの回答
                     @if(isset($question->answer))
                         <div class="text-right">
                             投稿日時：{{ $question->answer->created_at }}
@@ -54,7 +54,7 @@
                             <form action="/reviews/{{ $review->id }}/questions/{{ $question->id }}/answers/{{ $question->answer->id }}" id="form_{{ $question->answer->id }}" method="post" style="display:inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" onclick="return Check()" class="btn btn-link">削除する</button> 
+                                <button type="submit" onclick="return Check()" class="btn btn-dark">削除する</button> 
                             </form>
                         @endif
                     @endif
@@ -63,7 +63,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="reply-name col-md-6">
-                                {{ $reply->user->name }}
+                                <i class="fa-solid fa-circle-user fa-lg"></i> {{ $reply->user->name }}
                             </div>
                             <div class="reply-created_at col-md-6 text-md-right">
                                 投稿日時：{{ $reply->created_at }}

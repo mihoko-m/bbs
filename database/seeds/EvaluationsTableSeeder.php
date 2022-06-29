@@ -23,6 +23,11 @@ class EvaluationsTableSeeder extends Seeder
         ]);
         
         Evaluation::create([
+            'name' => 'レポートのみ',
+            'created_at' => now(),
+        ]);
+        
+        Evaluation::create([
             'name' => '平常点と定期試験',
             'created_at' => now(),
         ]);
@@ -33,7 +38,7 @@ class EvaluationsTableSeeder extends Seeder
         ]);
         
         Evaluation::create([
-            'name' => 'レポートのみ',
+            'name' => '定期試験とレポート',
             'created_at' => now(),
         ]);
         
