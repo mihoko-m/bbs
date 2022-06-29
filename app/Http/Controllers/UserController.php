@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function show(User $user, Review $review)
     {
-        return view('users/show')->with(['user' => $user])->with(['reviews' => $user->getByUser()]);
+        return view('users/show')->with(['user' => $user])->with(['reviews' => $user->getByUser()])->with(['favorites' => $user->favorites()->get()]);
     }
     
     public function edit(User $user, Faculty $faculty)
