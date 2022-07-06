@@ -56,6 +56,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     ログイン
                                 </button>
+                                
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
@@ -65,6 +66,10 @@
                             </div>
                         </div>
                     </form>
+                    <br>
+                    <div class="text-center">
+                    <a href="/login/google"  class="btn btn-outline-primary" role="button"><i class="fa-brands fa-google fa-lg"></i> Googleアカウントで登録/ログイン</a>
+                    </div>
                 </div>
             </div>
         </div>

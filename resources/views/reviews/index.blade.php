@@ -5,7 +5,6 @@
         <title>授業評価一覧</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/448df20bce.js" crossorigin="anonymous"></script>
     </head>
 @extends('layouts.app')
 
@@ -39,19 +38,21 @@
                         新着順
                     @endif
                 </h5>
-                並び替え
-                    <a class="btn btn-link" href="/">新着順</a>
+                    並び替え：
+                    <button type="submit" class="btn btn-link" name="order" value="new">新着順</button>
                     <button type="submit" class="btn btn-link" name="order" value="credit">単位取得度が高い順</button>
                     <button type="submit" class="btn btn-link" name="order" value="adequacy">充実度が高い順</button>
                 </form>
-            
-            @if (count($reviews) >0)
-                <p>全{{ $reviews->total() }}件中 
-                {{  ($reviews->currentPage() -1) * $reviews->perPage() + 1}} - 
-                {{ (($reviews->currentPage() -1) * $reviews->perPage() + 1) + (count($reviews) -1)  }}件のデータが表示されています。</p>
-            @else
-                <p>データがありません。</p>
-            @endif 
+                @if (count($reviews) >0)
+                <div class="text-md-right">
+                    全{{ $reviews->total() }}件中 
+                    {{  ($reviews->currentPage() -1) * $reviews->perPage() + 1}} - 
+                    {{ (($reviews->currentPage() -1) * $reviews->perPage() + 1) + (count($reviews) -1)  }}件
+                @else
+                <div>
+                    データがありません
+                @endif
+                </div>
             </div>
             <div class="row">
                 <div class='reviews col-md-8'>
@@ -60,11 +61,7 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="subject col-md-6">
-                                        @if(isset( $review->subject ))
-                                            <b>{{ $review->subject->name }}</b>
-                                        @else
-                                            <b>{{ $review->class }}</b>
-                                        @endif
+                                        <b>{{ $review->subject->name }}</b>
                                     </div>
                                     <div class="time col-md-6 text-md-right">
                                         投稿日時：{{ $review->created_at }}
@@ -72,19 +69,14 @@
                                 </div>
                                 <div class="row">
                                     <div class="faculty col-md-6">
-                                        @if(isset( $review->faculty ))
-                                            <a href="/faculties/{{ $review->faculty->id }}">
-                                                {{ $review->faculty->name }} {{ $review->faculty->department_name }}
-                                            </a>
-                                        @endif
-                                        @if(isset( $review->teacher ))
-                                            {{ $review->teacher->name }}先生
-                                        @endif
+                                        <a href="/faculties/{{ $review->faculty->id }}">
+                                            {{ $review->faculty->name }} {{ $review->faculty->department_name }}
+                                        </a>
+                                        {{ $review->teacher->name }}先生
                                     </div>
                                     <div class="user col-md-6 text-md-right">
-                                        @if(isset( $review->user ))
-                                            投稿者：<a href="/users/{{ $review->user->id }}/mypage">{{ $review->user->name }}</a>
-                                        @endif
+                                        <i class="fa-solid fa-circle-user fa-lg"></i>
+                                        <a href="/users/{{ $review->user->id }}">{{ $review->user->name }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -114,20 +106,6 @@
                 <div class="contents col-md-4">
                     <div class="card">
                         <div class="card-header">
-                            コンテンツ
-                        </div>
-                        <div class="card-body">
-                            <div>
-                                <a>>単位取得度ランキング</a>
-                            </div>
-                            <div>
-                                <a>>充実度ランキング</a>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="card">
-                        <div class="card-header">
                             学部・学科別
                         </div>
                         <div class="card-body">
@@ -138,12 +116,29 @@
                             @endforeach
                         </div>
                     </div>
+                    <br>
+                    <div class="card">
+                        <div class="card-header">
+                            リンク
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <a class="btn btn-link" target="_blank" href="https://info.kansai-u.ac.jp/login">
+                                    関西大学インフォメーションシステム
+                                </a>
+                            </div>
+                            <div>
+                                <a class="btn btn-link" target="_blank" href="https://syllabus3.jm.kansai-u.ac.jp/syllabus/search/curri/CurriSearchTop.html">
+                                    関西大学シラバスシステム
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class='pagination'>
                 {{ $reviews->appends(request()->query())->links() }}
             </div>
-            <a class="btn btn-primary" href='/reviews/create'>新規投稿する</a>
         </div>
     </body>
 </html>

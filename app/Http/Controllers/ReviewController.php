@@ -24,15 +24,33 @@ class ReviewController extends Controller
 
         if ($search_subject && $search_teacher) {
             
-            $reviews = $review->getPaginateBySearch(10, $search_subject, $search_teacher);
+            if ($order === "credit") {
+                $reviews = $review->getPaginateBySearchCredit(10, $search_subject, $search_teacher);
+            } else if ($order === "adequacy") {
+                $reviews = $review->getPaginateBySearchAdequacy(10, $search_subject, $search_teacher);
+            } else {
+                $reviews = $review->getPaginateBySearch(10, $search_subject, $search_teacher);    
+            }
             
         } else if ($search_subject) {
             
-            $reviews = $review->getPaginateBySearchSubject(10, $search_subject);
+            if ($order === "credit") {
+                $reviews = $review->getPaginateBySearchSubjectCredit(10, $search_subject);
+            } else if ($order === "adequacy") {
+                $reviews = $review->getPaginateBySearchSubjectAdequacy(10, $search_subject);
+            } else {
+                $reviews = $review->getPaginateBySearchSubject(10, $search_subject);    
+            }
             
         } else if ($search_teacher) {
             
-            $reviews = $review->getPaginateBySearchTeacher(10, $search_teacher);
+            if ($order === "credit") {
+                $reviews = $review->getPaginateBySearchTeacherCredit(10, $search_teacher);
+            } else if ($order === "adequacy") {
+                $reviews = $review->getPaginateBySearchTeacherAdequacy(10, $search_teacher);
+            } else {
+                $reviews = $review->getPaginateBySearchTeacher(10, $search_teacher);    
+            }
             
         } else if ($order === "credit") {
             
@@ -104,7 +122,6 @@ class ReviewController extends Controller
     
     public function update(Review $review, Subject $subject, Teacher $teacher, ReviewRequest $request)
     {
-        dd(1);
         if(\Auth::user()->id == $review->user_id){
             $input_review = $request['review'];
             
