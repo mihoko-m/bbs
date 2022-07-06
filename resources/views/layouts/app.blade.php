@@ -11,7 +11,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/bbs.js') }}" defer></script>
     <script src="https://unpkg.com/vue-star-rating/dist/VueStarRating.umd.min.js"></script>
+    <script src="https://kit.fontawesome.com/448df20bce.js" crossorigin="anonymous"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -40,6 +42,14 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        <li class="nav-item">
+                            <a class="nav-link" href='/reviews/create'>新規投稿</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLScmTLjs8G64ESn3UyaI2ueIzygeQHQ0vl47Pj_ISJIfOSIyfw/viewform?usp=sf_link">
+                                お問い合わせ
+                            </a>
+                        </li>
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">ログイン</a>
@@ -61,7 +71,7 @@
                                                      document.getElementById('logout-form').submit();">
                                         ログアウト
                                     </a>
-                                    <a class="dropdown-item" href="/users/{{Auth::user()->id}}/mypage">マイページ</a>
+                                    <a class="dropdown-item" href="/users/{{Auth::user()->id}}">マイページ</a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf

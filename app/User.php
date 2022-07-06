@@ -23,6 +23,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'faculty_id',
         'profile',
+        'provider_id',
+        'email_verified_at',
     ];
 
     /**
@@ -67,6 +69,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function replies()   
     {
         return $this->hasMany('App\Reply');  
+    }
+    
+    public function favorites()
+    {
+        return $this->belongsToMany('App\Review')->withTimestamps();
     }
     
     public function getByUser(int $limit_count = 3)

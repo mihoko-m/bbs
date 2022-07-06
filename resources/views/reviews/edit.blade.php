@@ -16,13 +16,6 @@
                         @method('PUT')
                             <div class="card-body">
                                 <div class="form-group row">
-                                    <label for="title" class="col-md-4 col-form-label text-md-right">授業名</label>
-                                        <div class="col-md-6">
-                                            <input type="text" name="review[class]" value="{{ $review->class }}"/>
-                                            <p class="title__error" style="color:red">{{ $errors->first('review.class') }}</p>
-                                        </div>
-                                </div>
-                                <div class="form-group row">
                                     <label for="subject" class="col-md-4 col-form-label text-md-right">科目名</label>
                                         <div class="col-md-6">
                                             <input type="text" name="subject[name]" value="{{ $review->subject->name }}"/>
@@ -51,10 +44,17 @@
                                         </div> 
                                 </div>
                                 <div class="form-group row">
+                                    <label for="teacher" class="col-md-4 col-form-label text-md-right">講師名</label>
+                                        <div class="col-md-6">
+                                            <input type="text" name="teacher[name]" placeholder="講師名" value="{{ $review->teacher->name }}"/>
+                                            <p class="title__error" style="color:red">{{ $errors->first('teacher.name') }}</p>
+                                        </div>
+                                </div>
+                                <div class="form-group row">
                                     <label for="evaluation" class="col-md-4 col-form-label text-md-right">成績評価</label>
                                         <div class="col-md-8">
                                             @foreach($evaluations as $evaluation)
-                                                <input type="radio" name="review[evaluation_id]" value="{{ $evaluation->id }}"/>
+                                                <input type="radio" name="review[evaluation_id]" value="{{ $evaluation->id }}" @if( $review->evaluation->id === $evaluation->id) checked @endif/>
                                                     {{ $evaluation->name }}
                                             @endforeach
                                         </div>

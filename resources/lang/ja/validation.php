@@ -129,15 +129,26 @@ return [
     */
 
     'custom' => [
-        'review.class' => [
-            'required' => '必ず授業名を入力してください。',
-            'string' => '文字列を入力してください。',
-            'max' => '字数オーバーです。50文字以内でご入力ください。'
-        ],
         'review.body' => [
             'required' => '必ず講義内容を入力してください。',
             'string' => '文字列を入力してください。',
             'max' => '字数オーバーです。300文字以内でご入力ください。'
+        ],
+        
+        'review.evaluation_id' => [
+            'required' => '必ず成績評価方法を選択してください。'
+        ],
+        
+        'review.faculty_id' => [
+            'required' => '必ず学部学科を選択してください。'
+        ],
+        
+        'review.get_credit' => [
+            'required' => '必ず単位取得度を選択してください。'
+        ],
+        
+        'review.adequacy' => [
+            'required' => '必ず充実度を選択してください。'
         ],
        
        'subject.name' => [

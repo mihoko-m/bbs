@@ -20,10 +20,13 @@ class ReviewRequest extends FormRequest
     public function rules()
     {
         return [
-            'review.class' => 'required|string|max:50',
             'review.body' => 'required|string|max:300',
             'subject.name' => 'required|string|max:50',
             'teacher.name' => 'required|string|max:50',
+            'review.evaluation_id' => 'required',
+            'review.faculty_id' => 'required',
+            'review.get_credit' => 'required',
+            'review.adequacy' => 'required',
         ];
     }
 }
