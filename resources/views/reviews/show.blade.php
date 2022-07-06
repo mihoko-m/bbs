@@ -17,14 +17,24 @@
             <a class="btn btn-link" href="/faculties/{{ $review->faculty->id }}" role="button"><<学部・学科別ページに戻る</a>
             <div class='card'>
                 <div class="card-header">
-                        <b>{{ $review->subject->name }}</b>
+                    <div class="row">
+                        <div class="subject col-md-6">
+                            <b>{{ $review->subject->name }}</b>
+                        </div>
+                        <div class="time col-md-6 text-md-right">
+                            投稿日時：{{ $review->created_at }}
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="faculty col-md-6">
+                            <a href="/faculties/{{ $review->faculty->id }}">
                                 {{ $review->faculty->name }} {{ $review->faculty->department_name }}
+                            </a>
+                            {{ $review->teacher->name }}先生
                         </div>
                         <div class="user col-md-6 text-md-right">
-                                <i class="fa-solid fa-circle-user fa-lg"></i>
-                                <a href="/users/{{ $review->user->id }}">{{ $review->user->name }}</a>
+                            <i class="fa-solid fa-circle-user fa-lg"></i>
+                            <a href="/users/{{ $review->user->id }}">{{ $review->user->name }}</a>
                         </div>
                     </div>
                 </div>
@@ -53,7 +63,7 @@
                     </div>
                     <br>
                     <div class="row">
-                            <a class="btn btn-link col-md-4" href="/?search_subject={{ $review->subject->name }}&search_teacher={{ $review->teacher->name }}" role="button">
+                            <a class="btn btn-link col-md-4" href="/reviews/teachers/{{ $review->teacher->id }}/subjects/{{ $review->subject->id }}" role="button">
                                 同じ講義のレビューをすべてみる
                             </a>
                     @if(isset( $review->user ) && Auth::user()->id === $review->user->id)
