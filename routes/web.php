@@ -18,6 +18,9 @@ Route::get('login/{provider}/callback', 'SocialLoginController@handleProviderCal
 Route::group(['middleware' => ['auth','verified']], function(){
     Route::post('/reviews', 'ReviewController@store');
     Route::get('/reviews/create', 'ReviewController@create');
+    Route::get('/reviews/get_credit/ranking', 'ReviewController@get_creditRanking');
+    Route::get('/reviews/adequacy/ranking', 'ReviewController@adequacyRanking');
+    Route::get('/reviews/teachers/{teacher}/subjects/{subject}','ReviewController@searchindex');
     Route::get('/reviews/{review}/edit', 'ReviewController@edit');
     Route::post('/questions/{review}','QuestionController@store');
     Route::get('/questions/{review}/create','QuestionController@create');

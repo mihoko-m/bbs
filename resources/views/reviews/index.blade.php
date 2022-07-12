@@ -132,6 +132,16 @@
                                     関西大学シラバスシステム
                                 </a>
                             </div>
+                            <div>
+                                <a class="btn btn-link" href="/reviews/get_credit/ranking">
+                                    単位取得度ランキング
+                                </a>
+                            </div>
+                            <div>
+                                <a class="btn btn-link" href="/reviews/adequacy/ranking">
+                                    充実度ランキング
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -78,6 +78,6 @@ class User extends Authenticatable implements MustVerifyEmail
     
     public function getByUser(int $limit_count = 3)
     {
-        return $this->reviews()->with('user')->orderBy('updated_at', 'DESC')->paginate($limit_count);
+        return $this->reviews()->with('user')->orderBy('created_at', 'DESC')->paginate($limit_count);
     }
 }

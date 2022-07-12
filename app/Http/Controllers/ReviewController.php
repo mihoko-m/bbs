@@ -164,4 +164,27 @@ class ReviewController extends Controller
             abort(403, '権限がありません');
         }
     }
+    
+    public function get_creditRanking(Review $review)
+    {
+        $groups = $review->get_creditRank();
+        return view('reviews/get_credit')->with(['groups' => $groups]);
+    }
+    
+    public function adequacyRanking(Review $review)
+    {
+        $groups = $review->adequacyRank();
+        return view('reviews/adequacy')->with(['groups' => $groups]);
+    }
+    
+    public function searchindex(Teacher $teacher, Subject $subject, Review $review)
+    {
+        $reviews = $review->search($teacher, $subject);
+        $get_credit = $reviews->avg('get_credit');
+        $adequacy = $reviews->avg('adequacy');
+        
+        return view('reviews/searchindex')
+        ->with(['reviews' => $reviews])->with(['teacher' => $teacher])->with(['subject' => $subject])
+        ->with(['get_credit' => $get_credit])->with(['adequacy' => $adequacy]);
+    }
 }
