@@ -11,7 +11,7 @@
         <div class="container">
             <div class="card">
                 <div class="card-header">プロフィール編集</div>
-                    <form action="/users/{{ $user->id }}" method="POST">
+                    <form action="/users/{{ $user->id }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                             <div class="card-body">
@@ -28,11 +28,17 @@
                                         </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label for="image_path" class="col-md-4 col-form-label text-md-right">プロフィール画像</label>
+                                        <div class="col-md-6">
+                                            <input type="file" name="image">
+                                            <p class="image__error" style="color:red">{{ $errors->first('image') }}</p>
+                                        </div>
+                                </div>
+                                <div class="form-group row">
                                     <label for="faculty" class="col-md-4 col-form-label text-md-right">所属学部・学科名</label>
                                         <div class="col-md-6">
                                             <select name="user[faculty_id]">
                                                 @if(!isset( $user->faculty ))
-                                                    <option hidden>選択してください</option>
                                                     @foreach($faculties as $faculty)
                                                         <option value="{{ $faculty->id }}">{{ $faculty->name }} {{ $faculty->department_name }}</option>
                                                     @endforeach
@@ -45,24 +51,21 @@
                                                         @endif
                                                     @endforeach
                                                 @endif
+                                                <p class="faculty__error" style="color:red">{{ $errors->first('user.faculty_id') }}</p>
                                             </select>
                                         </div> 
                                 </div>
                                 <div class="form-group row">
                                     <label for="body" class="col-md-4 col-form-label text-md-right">プロフィール</label>
                                         <div class="col-md-6">
-                                            @if (isset($user->profile))
-                                                <textarea class="form-control" name="user[profile]" placeholder="300文字以内で入力してください。">{{ $user->profile }}</textarea>
-                                            @else
-                                                <textarea class="form-control" name="user[profile]" placeholder="300文字以内で入力してください。">{{ $user->profile }}</textarea>
-                                            @endif
+                                            <textarea class="form-control" name="user[profile]" placeholder="300文字以内で入力してください。">{{ $user->profile }}</textarea>
                                             <p class="body__error" style="color:red">{{ $errors->first('user.profile') }}</p>
                                         </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-8 offset-md-4">
                                         <input type="submit" value="保存" class="btn btn-primary"/>
-                                        <a class="btn btn-link" href="/users/{{Auth::user()->id}}/mypage">マイページに戻る</a>
+                                        <a class="btn btn-link" href="/users/{{Auth::user()->id}}">マイページに戻る</a>
                                     </div>
                                 </div>
                             </div>

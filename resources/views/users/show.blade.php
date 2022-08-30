@@ -15,6 +15,12 @@
         <div class="container">
             <div class="title col-md-12">
                 <h5>{{ $user->name }}さんのページ</h5>
+                @if(isset( $user->image_path))
+                <div class="text-md-right">
+                    <img src="{{ $user->image_path }}" class="icon">
+                </div>
+                @endif
+                <br>
             </div>
             <div class="row">
                 <div class="col-md-12">

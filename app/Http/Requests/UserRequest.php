@@ -16,6 +16,8 @@ class UserRequest extends FormRequest
     {
         return [
             'user.profile' => 'nullable|string|max:300',
+            'user.faculty_id' => "required",
+            'image' => 'image|file',
         ];
     }
 }
